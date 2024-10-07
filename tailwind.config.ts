@@ -22,6 +22,13 @@ const config: Config = {
           DEFAULT: "var(--selected)",
           foreground: "var(--selected-foreground)",
         },
+        textColor: "var(--text-color)",
+      },
+      fontFamily: {
+        archivo: ["var(--font-archivo-regular)", "sans-serif"],
+        archivoBold: ["var(--font-archivo-bold)", "sans-serif"],
+        archivoMedium: ["var(--font-archivo-medium)", "sans-serif"],
+        archivoSemiBold: ["var(--font-archivo-semi-bold)", "sans-serif"],
       },
     },
   },

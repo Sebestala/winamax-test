@@ -18,8 +18,12 @@ body {
     --foreground: #fff;
     --primary: #aa0909;
     --secondary: #ffbf00;
-    --text: #0d0d0d;
+    --text-color: #0d0d0d;
     --selected: #33cc7f;
     --selected-foreground: #145233;
+    --font-archivo-regular: "Archivo Narrow", sans-serif;
+    --font-archivo-bold: "Archivo Narrow Bold", sans-serif;
+    --font-archivo-medium: "Archivo Narrow Medium", sans-serif;
+    --font-archivo-semi-bold: "Archivo Narrow SemiBold", sans-serif;
   }
 }
