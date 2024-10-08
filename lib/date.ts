@@ -31,7 +31,8 @@ function formatDate(date: Date): string {
   } else if (isTomorrow(date)) {
     return `Dem. ${timeFormat}`;
   } else {
-    return format(date, "EEE HH:mm", { locale: fr });
+    const formattedDate = format(date, "EEE HH:mm", { locale: fr });
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   }
 }
 
