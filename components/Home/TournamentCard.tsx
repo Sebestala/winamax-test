@@ -12,38 +12,43 @@ interface TournamentCardProps {
   toggleTournamentSelection: (tournamentId: string) => void;
 }
 
-export const TournamentCard = memo(function TournamentCard({
-  tournament,
-  isSelected,
-  toggleTournamentSelection,
-}: TournamentCardProps) {
-  return (
-    <div className="w-full max-w-md mx-auto relative">
-      {tournament.highlighted && <HighlightCard />}
-      <div
-        className={cn(
-          "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0 cursor-pointer",
-          isSelected ? "border-2 border-selected" : ""
-        )}
-        style={{
-          boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.15)",
-        }}
-        onClick={() => toggleTournamentSelection(tournament.tournamentId.toString())}
-      >
-        <div className="flex flex-col justify-between h-full">
-          <FlagAndNameAndSelectedIcon
-            flag={tournament.flag}
-            name={tournament.name}
-            isSelected={isSelected}
-          />
-          <TournamentInfo tournament={tournament} />
+export const TournamentCard = memo(
+  function TournamentCard({
+    tournament,
+    isSelected,
+    toggleTournamentSelection,
+  }: TournamentCardProps) {
+    return (
+      <div className="w-full max-w-md mx-auto relative">
+        {tournament.highlighted && <HighlightCard />}
+        <div
+          className={cn(
+            "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0 cursor-pointer",
+            isSelected ? "outline outline-2 outline-selected" : ""
+          )}
+          style={{
+            boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.15)",
+          }}
+          onClick={() => toggleTournamentSelection(tournament.tournamentId.toString())}
+        >
+          <div className="flex flex-col justify-between h-full">
+            <FlagAndNameAndSelectedIcon
+              flag={tournament.flag}
+              name={tournament.name}
+              isSelected={isSelected}
+            />
+            <TournamentInfo tournament={tournament} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.isSelected === nextProps.isSelected;
+  }
+);
 
-const HighlightCard = memo(function HighlightCard() {
+function HighlightCard() {
   return (
     <div className="mt-8">
       <div className="bg-secondary px-4 rounded-2xl h-16 absolute -top-5 left-0 right-0">
@@ -51,9 +56,9 @@ const HighlightCard = memo(function HighlightCard() {
       </div>
     </div>
   );
-});
+}
 
-const FlagAndNameAndSelectedIcon = memo(function FlagAndNameAndSelectedIcon({
+function FlagAndNameAndSelectedIcon({
   flag,
   name,
   isSelected,
@@ -94,9 +99,9 @@ const FlagAndNameAndSelectedIcon = memo(function FlagAndNameAndSelectedIcon({
       </div>
     </div>
   );
-});
+}
 
-const TournamentInfo = memo(function TournamentInfo({ tournament }: { tournament: Tournament }) {
+function TournamentInfo({ tournament }: { tournament: Tournament }) {
   return (
     <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-2 rounded-xl bg-white items-center justify-center">
       <span className="flex items-center font-archivoSemiBold text-xs">
@@ -127,4 +132,4 @@ const TournamentInfo = memo(function TournamentInfo({ tournament }: { tournament
       </span>
     </div>
   );
-});
+}

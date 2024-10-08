@@ -5,41 +5,37 @@ import { Tournament } from "@/types/Tournaments";
 import { memo, useState } from "react";
 
 const MAX_SELECTION = 3;
-
-function useTournamentSelection() {
-  const [selectedTournaments, setSelectedTournaments] = useState<string[]>([]);
-
-  const toggleTournamentSelection = (tournamentId: string) => {
-    setSelectedTournaments((prevSelected) => {
-      if (prevSelected.includes(tournamentId)) {
-        return prevSelected.filter((id) => id !== tournamentId);
-      } else if (prevSelected.length < MAX_SELECTION) {
-        return [...prevSelected, tournamentId];
-      }
-      return prevSelected;
-    });
-  };
-
-  return { selectedTournaments, toggleTournamentSelection };
-}
-
 interface TournamentListProps {
   tournaments: Tournament[];
 }
 
 export const TournamentList = memo(function TournamentList({ tournaments }: TournamentListProps) {
-  const { selectedTournaments, toggleTournamentSelection } = useTournamentSelection();
+  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
+
+  const toggleTournamentSelection = (index: number) => {
+    setSelectedIndexes((prevSelected) => {
+      if (prevSelected.includes(index)) {
+        return prevSelected.filter((i) => i !== index);
+      } else if (prevSelected.length < MAX_SELECTION) {
+        return [...prevSelected, index];
+      }
+      return prevSelected;
+    });
+  };
 
   return (
     <>
-      {tournaments.map((tournament) => (
-        <TournamentCard
-          key={tournament.tournamentId}
-          tournament={tournament}
-          isSelected={selectedTournaments.includes(tournament.tournamentId.toString())}
-          toggleTournamentSelection={toggleTournamentSelection}
-        />
-      ))}
+      {tournaments.map((tournament, index) => {
+        const isSelected = selectedIndexes.includes(index);
+        return (
+          <TournamentCard
+            key={tournament.tournamentId}
+            tournament={tournament}
+            isSelected={isSelected}
+            toggleTournamentSelection={() => toggleTournamentSelection(index)}
+          />
+        );
+      })}
     </>
   );
 });
