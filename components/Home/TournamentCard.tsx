@@ -12,11 +12,11 @@ interface TournamentCardProps {
 
 export function TournamentCard({ tournament, isSelected }: TournamentCardProps) {
   return (
-    <div className="w-full max-w-md mx-auto relative">
+    <div className="w-full max-w-md mx-auto relative cursor-pointer">
       {tournament.highlighted && <HighlightCard />}
       <div
         className={cn(
-          "bg-foreground rounded-2xl h-16 relative top-5 left-0 right-0",
+          "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0",
           isSelected ? "border-2 border-selected" : ""
         )}
         style={{
@@ -38,7 +38,7 @@ export function TournamentCard({ tournament, isSelected }: TournamentCardProps) 
 function HighlightCard() {
   return (
     <div className="mt-8">
-      <div className="bg-secondary px-4 rounded-2xl h-16 absolute top-0 left-0 right-0">
+      <div className="bg-secondary px-4 rounded-2xl h-16 absolute -top-5 left-0 right-0">
         <h3 className="text-textColor font-archivoBold text-sm">TOP TOURNOI</h3>
       </div>
     </div>

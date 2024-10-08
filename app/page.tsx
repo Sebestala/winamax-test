@@ -7,8 +7,8 @@ const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
 
 export default function Component() {
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      <main className="flex-1 overflow-y-auto mt-12 mb-16 p-4">
+    <div className="flex flex-col h-full bg-gray-100">
+      <main className="flex-1 overflow-y-auto mt-11 mb-16 p-4">
         <div className="w-full max-w-screen-md mx-auto bg-background">
           <Image
             src="/assets/tournois.jpg"
@@ -16,7 +16,7 @@ export default function Component() {
             layout="responsive"
             height={100}
             width={100}
-            className="rounded-3xl"
+            className="rounded-2xl"
           />
           <div className="space-y-3 mt-3">
             <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-1 rounded-lg bg-white">
