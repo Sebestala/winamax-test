@@ -1,5 +1,4 @@
 import Image from "next/image";
-import tournaments from "./data/sample-poker.json";
 import { TournamentList } from "@/components/index";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +26,7 @@ export default function Component() {
               <div className={cn(InfoClass)}>Buy-in</div>
               <div className={cn(InfoClass)}>Dotation</div>
             </div>
-            <TournamentList tournaments={tournaments} />
+            <TournamentList />
           </div>
         </div>
       </main>
