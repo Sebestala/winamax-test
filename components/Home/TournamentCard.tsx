@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Image from "next/image";
 import { Tournament } from "@/types/Tournaments";
 import { formatDateSimulated } from "@/lib/date";
@@ -8,34 +9,41 @@ const InfoClass = "justify-self-end text-xs font-archivo mr-2";
 interface TournamentCardProps {
   tournament: Tournament;
   isSelected: boolean;
+  toggleTournamentSelection: (tournamentId: string) => void;
 }
 
-export function TournamentCard({ tournament, isSelected }: TournamentCardProps) {
+export const TournamentCard = memo(function TournamentCard({
+  tournament,
+  isSelected,
+  toggleTournamentSelection,
+}: TournamentCardProps) {
   return (
-    <div className="w-full max-w-md mx-auto relative cursor-pointer">
+    <div className="w-full max-w-md mx-auto relative">
       {tournament.highlighted && <HighlightCard />}
       <div
         className={cn(
-          "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0",
+          "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0 cursor-pointer",
           isSelected ? "border-2 border-selected" : ""
         )}
         style={{
           boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.15)",
         }}
+        onClick={() => toggleTournamentSelection(tournament.tournamentId.toString())}
       >
         <div className="flex flex-col justify-between h-full">
           <FlagAndNameAndSelectedIcon
             flag={tournament.flag}
             name={tournament.name}
+            isSelected={isSelected}
           />
           <TournamentInfo tournament={tournament} />
         </div>
       </div>
     </div>
   );
-}
+});
 
-function HighlightCard() {
+const HighlightCard = memo(function HighlightCard() {
   return (
     <div className="mt-8">
       <div className="bg-secondary px-4 rounded-2xl h-16 absolute -top-5 left-0 right-0">
@@ -43,9 +51,17 @@ function HighlightCard() {
       </div>
     </div>
   );
-}
+});
 
-function FlagAndNameAndSelectedIcon({ flag, name }: { flag: string; name: string }) {
+const FlagAndNameAndSelectedIcon = memo(function FlagAndNameAndSelectedIcon({
+  flag,
+  name,
+  isSelected,
+}: {
+  flag: string;
+  name: string;
+  isSelected: boolean;
+}) {
   return (
     <div className="relative ">
       <div className="absolute w-full max-w-screen-md mx-auto top-1 -left-2 flex items-center gap-3">
@@ -64,21 +80,23 @@ function FlagAndNameAndSelectedIcon({ flag, name }: { flag: string; name: string
           />
         </div>
         <h2 className="flex-1 font-archivoBold text-lg">{name}</h2>
-        <div className="flex items-center gap-1.5 bg-selected rounded-xl pl-0.5 pr-2 py-0.5">
-          <Image
-            src={`/assets/tick.svg`}
-            width={16}
-            height={16}
-            alt="tick"
-          />
-          <span className="font-archivoBold text-selected-foreground leading-none">IN</span>
-        </div>
+        {isSelected && (
+          <div className="flex items-center gap-1.5 bg-selected rounded-xl pl-0.5 pr-2 py-0.5">
+            <Image
+              src={`/assets/tick.svg`}
+              width={16}
+              height={16}
+              alt="tick"
+            />
+            <span className="font-archivoBold text-selected-foreground leading-none">IN</span>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+});
 
-function TournamentInfo({ tournament }: { tournament: Tournament }) {
+const TournamentInfo = memo(function TournamentInfo({ tournament }: { tournament: Tournament }) {
   return (
     <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-2 rounded-xl bg-white items-center justify-center">
       <span className="flex items-center font-archivoSemiBold text-xs">
@@ -109,4 +127,4 @@ function TournamentInfo({ tournament }: { tournament: Tournament }) {
       </span>
     </div>
   );
-}
+});

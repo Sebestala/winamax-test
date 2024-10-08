@@ -1,13 +1,13 @@
 import Image from "next/image";
 import tournaments from "./data/sample-poker.json";
-import { TournamentCard } from "@/components/index";
+import { TournamentList } from "@/components/index";
 import { cn } from "@/lib/utils";
 
 const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
 
 export default function Component() {
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-screen bg-gray-100">
       <main className="flex-1 overflow-y-auto mt-11 mb-16 p-4">
         <div className="w-full max-w-screen-md mx-auto bg-background">
           <Image
@@ -27,24 +27,10 @@ export default function Component() {
               <div className={cn(InfoClass)}>Buy-in</div>
               <div className={cn(InfoClass)}>Dotation</div>
             </div>
-            <TournamentList />
+            <TournamentList tournaments={tournaments} />
           </div>
         </div>
       </main>
     </div>
-  );
-}
-
-function TournamentList() {
-  return (
-    <>
-      {tournaments.slice(0, 15).map((tournament) => (
-        <TournamentCard
-          key={tournament.tournamentId}
-          tournament={tournament}
-          isSelected={true}
-        />
-      ))}
-    </>
   );
 }
