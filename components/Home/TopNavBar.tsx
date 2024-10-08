@@ -7,7 +7,7 @@ export const TopNavBar = () => (
       <Image
         src="/assets/logo.png"
         alt="Winamax Logo"
-        className="h-12"
+        className="h-12 h-auto w-auto"
         width={42}
         height={42}
         style={{ objectFit: "contain" }}

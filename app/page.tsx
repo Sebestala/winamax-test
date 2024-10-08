@@ -10,14 +10,14 @@ export default function Component() {
     <div className="flex flex-col h-screen bg-gray-100">
       <main className="flex-1 overflow-y-auto mt-11 mb-16 p-4">
         <div className="w-full max-w-screen-md mx-auto bg-background">
-          <Image
-            src="/assets/tournois.jpg"
-            alt="tournois"
-            layout="responsive"
-            height={100}
-            width={100}
-            className="rounded-2xl"
-          />
+          <div className="relative w-full h-40">
+            <Image
+              src="/assets/tournois.jpg"
+              alt="tournois"
+              fill
+              className="rounded-2xl object-cover"
+            />
+          </div>
           <div className="space-y-3 mt-3">
             <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-1 rounded-lg bg-white">
               <div className="text-xs font-archivoBold">Début</div>

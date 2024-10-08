@@ -22,7 +22,7 @@ export const BottomNavBar = () => {
                 : "/assets/tabbar/Home-Inactif.svg"
             }
             alt="Home"
-            className="h-11"
+            className="h-11 h-auto w-auto"
             width={42}
             height={42}
             style={{ objectFit: "contain" }}
@@ -49,7 +49,7 @@ export const BottomNavBar = () => {
                 : "/assets/tabbar/Readme-Inactif.svg"
             }
             alt="Readme"
-            className="h-11"
+            className="h-11 h-auto w-auto"
             width={42}
             height={42}
             style={{ objectFit: "contain" }}
