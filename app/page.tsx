@@ -1,6 +1,9 @@
 import Image from "next/image";
 import tournaments from "./data/sample-poker.json";
 import { TournamentCard } from "@/components/index";
+import { cn } from "@/lib/utils";
+
+const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
 
 export default function Component() {
   return (
@@ -17,12 +20,12 @@ export default function Component() {
           />
           <div className="space-y-3 mt-3">
             <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-1 rounded-lg bg-white">
-              <div className="text-xs">Début</div>
-              <div className="col-span-2 text-xs pl-4">Nom</div>
-              <div className="justify-self-end text-xs">Jeu</div>
-              <div className="justify-self-end text-xs">Jrs.</div>
-              <div className="justify-self-end text-xs">Buy-in</div>
-              <div className="justify-self-end text-xs">Dotation</div>
+              <div className="text-xs font-archivoBold">Début</div>
+              <div className="col-span-2 text-xs font-archivoBold pl-4">Nom</div>
+              <div className={cn(InfoClass)}>Jeu</div>
+              <div className={cn(InfoClass)}>Jrs.</div>
+              <div className={cn(InfoClass)}>Buy-in</div>
+              <div className={cn(InfoClass)}>Dotation</div>
             </div>
             <TournamentList />
           </div>

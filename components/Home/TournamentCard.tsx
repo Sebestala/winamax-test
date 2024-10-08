@@ -3,7 +3,7 @@ import { Tournament } from "@/types/Tournaments";
 import { formatDateSimulated } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
-const ValueClass = "justify-self-end text-xs font-archivo";
+const InfoClass = "justify-self-end text-xs font-archivo mr-2";
 
 interface TournamentCardProps {
   tournament: Tournament;
@@ -96,13 +96,13 @@ function TournamentInfo({ tournament }: { tournament: Tournament }) {
           />
         ))}
       </div>
-      <span className={cn(ValueClass)}>{tournament.limit}</span>
-      <span className={cn(ValueClass)}>{tournament.nbPlayers}</span>
-      <span className={cn(ValueClass)}>{tournament.buyIn} €</span>
+      <span className={cn(InfoClass)}>{tournament.limit}</span>
+      <span className={cn(InfoClass)}>{tournament.nbPlayers}</span>
+      <span className={cn(InfoClass)}>{tournament.buyIn} €</span>
       <span
         className={cn(
-          ValueClass,
-          "font-archivoSemiBold text-primary bg-backgroundDarker rounded-lg px-1 "
+          InfoClass,
+          "font-archivoSemiBold text-primary bg-backgroundDarker rounded-lg px-1 mr-0"
         )}
       >
         {tournament.prizepool.toLocaleString("fr-FR")} €
