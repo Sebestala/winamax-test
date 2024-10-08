@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { TopNavBar } from "@/components/ui/TopNavBar";
-import { BottomNavBar } from "@/components/ui/BottomNavBar";
+import { TopNavBar, BottomNavBar } from "@/components/index";
 
 const archivoBold = localFont({
   src: "./fonts/ArchivoNarrow-Bold.ttf",

@@ -14,8 +14,9 @@ body {
 
 @layer base {
   :root {
-    --background: #f0f1f5;
+    --background: #f2f2f2;
     --foreground: #fff;
+    --backgroundDarker: #f0f1f5;
     --primary: #aa0909;
     --secondary: #ffbf00;
     --text-color: #0d0d0d;

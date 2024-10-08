@@ -13,6 +13,7 @@ export const BottomNavBar = () => {
         <button
           onClick={() => setActiveTab("home")}
           className={`flex flex-col items-center py-2 px-4 text-textColor`}
+          aria-label="Home link"
         >
           <Image
             src={
@@ -39,6 +40,7 @@ export const BottomNavBar = () => {
         <button
           onClick={() => setActiveTab("readme")}
           className={`flex flex-col items-center py-2 px-4 text-textColor`}
+          aria-label="Readme link"
         >
           <Image
             src={
