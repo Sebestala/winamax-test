@@ -8,7 +8,7 @@ export default function Component() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       <main className="flex-1 overflow-y-auto mt-11 mb-16 p-4">
-        <div className="w-full max-w-screen-md mx-auto bg-background">
+        <div className="w-full max-w-screen-sm mx-auto bg-background">
           <div className="relative w-full h-40">
             <Image
               src="/assets/tournois.jpg"

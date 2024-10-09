@@ -19,7 +19,7 @@ export const TournamentCard = memo(
     toggleTournamentSelection,
   }: TournamentCardProps) {
     return (
-      <div className="w-full max-w-md mx-auto relative">
+      <div className="w-full max-w-screen-sm mx-auto relative">
         {tournament.highlighted && <HighlightCard />}
         <div
           className={cn(

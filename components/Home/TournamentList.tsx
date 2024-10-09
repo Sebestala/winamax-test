@@ -2,15 +2,15 @@
 
 import { TournamentCard } from "./TournamentCard";
 import { Tournament } from "@/types/Tournaments";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import tournaments from "@/data/sample-poker.json";
 
 const MAX_SELECTION = 3;
-interface TournamentListProps {
-  tournaments: Tournament[];
-}
 
-export const TournamentList = memo(function TournamentList({ tournaments }: TournamentListProps) {
+export const TournamentList = memo(function TournamentList() {
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
+  const [remainingTournaments, setRemainingTournaments] = useState<Tournament[]>([]);
+  const initialTournaments = tournaments.slice(0, 20);
 
   const toggleTournamentSelection = (index: number) => {
     setSelectedIndexes((prevSelected) => {
@@ -23,9 +23,24 @@ export const TournamentList = memo(function TournamentList({ tournaments }: Tour
     });
   };
 
+  useEffect(() => {
+    const loadMoreTournaments = () => {
+      setRemainingTournaments((prevTournaments) => [
+        ...prevTournaments,
+        ...tournaments.slice(prevTournaments.length + 20, prevTournaments.length + 17),
+      ]);
+    };
+
+    const interval = setInterval(loadMoreTournaments, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const allTournaments = [...initialTournaments, ...remainingTournaments];
+
   return (
     <>
-      {tournaments.map((tournament, index) => {
+      {allTournaments.map((tournament, index) => {
         const isSelected = selectedIndexes.includes(index);
         return (
           <TournamentCard
