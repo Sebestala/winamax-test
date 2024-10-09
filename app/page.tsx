@@ -7,7 +7,10 @@ const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
 export default function Component() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-      <main className="flex-1 overflow-y-auto mt-11 mb-16 p-4">
+      <main
+        className="flex-1 overflow-y-auto mt-11 mb-16 p-4"
+        id="home"
+      >
         <div className="w-full max-w-screen-sm mx-auto bg-background">
           <TokenAnimation />
           <div className="relative w-full h-40">
@@ -16,6 +19,7 @@ export default function Component() {
               alt="tournois"
               fill
               className="rounded-2xl object-cover"
+              priority
             />
           </div>
           <div className="space-y-3 mt-3">
