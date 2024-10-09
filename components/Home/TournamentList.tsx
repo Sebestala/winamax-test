@@ -19,11 +19,14 @@ export const TournamentList = memo(function TournamentList() {
       if (prevSelected.includes(index)) {
         return prevSelected.filter((i) => i !== index);
       } else if (prevSelected.length < MAX_SELECTION) {
-        toggleAnimation();
         return [...prevSelected, index];
       }
       return prevSelected;
     });
+
+    if (!selectedIndexes.includes(index) && selectedIndexes.length < MAX_SELECTION) {
+      toggleAnimation(tournaments[index].prizepool);
+    }
   };
 
   useEffect(() => {

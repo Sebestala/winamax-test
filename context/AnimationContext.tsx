@@ -4,16 +4,19 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface AnimationContextType {
   isAnimating: boolean;
-  toggleAnimation: () => void;
+  toggleAnimation: (prizepool: number) => void;
+  prizepool: number;
 }
 
 const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [prizepool, setPrizepool] = useState(0);
 
-  const toggleAnimation = () => {
+  const toggleAnimation = (prizepool: number) => {
     setIsAnimating(true);
+    setPrizepool(prizepool);
     const timeoutId = setTimeout(() => {
       setIsAnimating(false);
     }, 1000);
@@ -23,7 +26,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AnimationContext.Provider value={{ isAnimating, toggleAnimation }}>
+    <AnimationContext.Provider value={{ isAnimating, toggleAnimation, prizepool }}>
       {children}
     </AnimationContext.Provider>
   );

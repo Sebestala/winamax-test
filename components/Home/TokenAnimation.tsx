@@ -4,16 +4,16 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAnimation } from "../../context/AnimationContext";
 
-const NB_TOKEN = 30;
-
 export const TokenAnimation = () => {
-  const { isAnimating } = useAnimation();
+  const { isAnimating, prizepool } = useAnimation();
+  const nbTokenToDisplay =
+    prizepool > 10000 ? 100 : prizepool > 1000 ? 50 : prizepool > 100 ? 25 : 10;
 
   return (
     <AnimatePresence>
       {isAnimating && (
         <motion.div className="absolute inset-0 overflow-hidden">
-          {[...Array(NB_TOKEN)].map((_, i) => (
+          {[...Array(nbTokenToDisplay)].map((_, i) => (
             <motion.div
               key={i}
               className={cn(
@@ -30,6 +30,7 @@ export const TokenAnimation = () => {
               initial={{ top: -40, left: `${Math.random() * 100}%` }}
               animate={{
                 top: "100%",
+                rotate: 360 * Math.random(),
                 transition: {
                   duration: 1.5 + Math.random() * 5,
                   ease: [0.25, 0.1, 0.25, 1],
