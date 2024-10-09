@@ -11,6 +11,7 @@ export const TournamentList = memo(function TournamentList() {
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
   const [remainingTournaments, setRemainingTournaments] = useState<Tournament[]>([]);
   const initialTournaments = tournaments.slice(0, 20);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const toggleTournamentSelection = (index: number) => {
     setSelectedIndexes((prevSelected) => {
@@ -25,10 +26,15 @@ export const TournamentList = memo(function TournamentList() {
 
   useEffect(() => {
     const loadMoreTournaments = () => {
-      setRemainingTournaments((prevTournaments) => [
-        ...prevTournaments,
-        ...tournaments.slice(prevTournaments.length + 20, prevTournaments.length + 17),
-      ]);
+      setIsLoading(true);
+      setRemainingTournaments((prevTournaments) => {
+        const newTournaments = tournaments.slice(
+          prevTournaments.length + 20,
+          prevTournaments.length + 170
+        );
+        setIsLoading(newTournaments.length > 0);
+        return [...prevTournaments, ...newTournaments];
+      });
     };
 
     const interval = setInterval(loadMoreTournaments, 3000);
@@ -51,6 +57,11 @@ export const TournamentList = memo(function TournamentList() {
           />
         );
       })}
+      {isLoading && (
+        <div className="flex justify-center items-center mt-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      )}
     </>
   );
 });
