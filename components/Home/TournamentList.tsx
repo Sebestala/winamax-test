@@ -4,6 +4,7 @@ import { TournamentCard } from "./TournamentCard";
 import { Tournament } from "@/types/Tournaments";
 import { memo, useEffect, useState } from "react";
 import tournaments from "@/data/sample-poker.json";
+import { useAnimation } from "@/context/AnimationContext";
 
 const MAX_SELECTION = 3;
 
@@ -12,12 +13,14 @@ export const TournamentList = memo(function TournamentList() {
   const [remainingTournaments, setRemainingTournaments] = useState<Tournament[]>([]);
   const initialTournaments = tournaments.slice(0, 20);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { toggleAnimation } = useAnimation();
 
   const toggleTournamentSelection = (index: number) => {
     setSelectedIndexes((prevSelected) => {
       if (prevSelected.includes(index)) {
         return prevSelected.filter((i) => i !== index);
       } else if (prevSelected.length < MAX_SELECTION) {
+        toggleAnimation();
         return [...prevSelected, index];
       }
       return prevSelected;
