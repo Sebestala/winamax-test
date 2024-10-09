@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TournamentList, TokenAnimation } from "@/components/index";
+import { TournamentList, TokenAnimation, ButtonMenuToggle } from "@/components/index";
 import { cn } from "@/lib/utils";
 
 const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
@@ -33,6 +33,7 @@ export default function Component() {
             </div>
             <TournamentList />
           </div>
+          <ButtonMenuToggle />
         </div>
       </main>
     </div>
