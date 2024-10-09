@@ -25,7 +25,7 @@ export const TokenAnimation = () => {
                   : i % 4 === 2
                   ? "bg-green-700"
                   : "bg-blue-700",
-                "rounded-full border-dashed border-8 border-white z-20"
+                "rounded-full border-dashed border-8 border-white z-20 pointer-events-none"
               )}
               initial={{ top: -40, left: `${Math.random() * 100}%` }}
               animate={{
