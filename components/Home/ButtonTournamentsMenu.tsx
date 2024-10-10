@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useBudget } from "@/context/BudgetContext";
+import { PokerChip } from "../ui/PokerChip";
 
-export function ButtonMenuToggle() {
+export function ButtonTournamentsMenu() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const { minBudget, maxBudget, setMinBudget, setMaxBudget } = useBudget();
@@ -27,10 +28,10 @@ export function ButtonMenuToggle() {
 
   return (
     <div className="relative">
-      <AnimatePresence>
-        {(!isPanelOpen || isDesktop) && (
-          <motion.button
-            className="fixed bottom-20 right-6 w-14 h-14 rounded-full flex items-center justify-center text-white z-50 border-dashed border-[6px] border-white bg-primary"
+      {(!isPanelOpen || isDesktop) && (
+        <AnimatePresence>
+          <motion.div
+            className="fixed bottom-20 right-6 z-50"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             animate={{ y: [0, -5, 0] }}
@@ -42,37 +43,18 @@ export function ButtonMenuToggle() {
               },
             }}
             onClick={togglePanel}
-            style={{
-              boxShadow:
-                "0px 0px 0px 0.4px black, 0px 5px 15px rgba(0, 0, 0, 0.30), inset 0 0 0 6px #911d1d",
-            }}
           >
-            <div className="flex items-center justify-center">
-              <Star
-                size={26}
-                fill="var(--secondary)"
-                className="-mr-2 -mb-1.5 "
-                stroke="black"
-                strokeWidth={0.3}
-              />
-              <Star
-                size={32}
-                fill="var(--secondary)"
-                className="-mt-2"
-                stroke="black"
-                strokeWidth={0.3}
-              />
-              <Star
-                size={26}
-                fill="var(--secondary)"
-                className="-ml-2 -mb-1.5"
-                stroke="black"
-                strokeWidth={0.3}
-              />
-            </div>
-          </motion.button>
-        )}
-      </AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <PokerChip />
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       <AnimatePresence>
         {isPanelOpen && (

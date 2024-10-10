@@ -26,8 +26,8 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Debounced setters, enlever useCallback et tester
-  const debouncedSetMinBudget = useCallback(debounce(setMinBudget, 300), []);
-  const debouncedSetMaxBudget = useCallback(debounce(setMaxBudget, 300), []);
+  const debouncedSetMinBudget = useCallback(debounce(setMinBudget, 500), []);
+  const debouncedSetMaxBudget = useCallback(debounce(setMaxBudget, 500), []);
 
   return (
     <BudgetContext.Provider
