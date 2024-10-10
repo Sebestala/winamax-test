@@ -1,15 +1,18 @@
 import React, { memo } from "react";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface PokerChipProps {
   isAnimating?: boolean;
   isGrayscale?: boolean;
+  size?: "small" | "large";
 }
 
 export const PokerChip = memo(function PokerChip({
   isAnimating = false,
   isGrayscale = false,
+  size = "large",
 }: PokerChipProps) {
   const starVariants = {
     animate: (i: number) => ({
@@ -31,64 +34,47 @@ export const PokerChip = memo(function PokerChip({
     return color;
   };
 
+  const sizeClasses = size === "small" ? "w-6 h-6" : "w-14 h-14";
+  const borderClasses = size === "small" ? "border-[3px]" : "border-[6px]";
+  const starSizes = size === "small" ? [12, 14, 12] : [26, 32, 26];
+
   return (
     <div
-      className={`w-14 h-14 rounded-full flex items-center justify-center text-white border-dashed border-[6px] ${
+      className={cn(
+        "rounded-full flex items-center justify-center text-white border-dashed",
+        sizeClasses,
+        borderClasses,
         isGrayscale ? "border-gray-300" : "border-white"
-      }`}
+      )}
       style={{
         backgroundColor: getColor("var(--primary)"),
-        boxShadow: `0px 0px 0px 0.4px black, 0px 5px 15px rgba(0, 0, 0, 0.30), inset 0 0 0 6px ${
-          isGrayscale ? "#707070" : "#911d1d"
-        }`,
+        boxShadow: `0px 0px 0px 0.4px black, 0px 2px 6px rgba(0, 0, 0, 0.30), inset 0 0 0 ${
+          size === "small" ? "3px" : "6px"
+        } ${isGrayscale ? "#707070" : "var(--primaryDarker)"}`,
       }}
     >
       <div className="flex items-center justify-center">
-        <motion.div
-          variants={starVariants}
-          animate={isAnimating ? "animate" : "initial"}
-          custom={0}
-          className="relative z-30"
-        >
-          <Star
-            size={26}
-            fill={getColor("var(--secondary)")}
-            className="-mr-2 -mb-1.5"
-            stroke={isGrayscale ? "#808080" : "black"}
-            strokeWidth={0.3}
-          />
-        </motion.div>
-        <motion.div
-          variants={starVariants}
-          animate={isAnimating ? "animate" : "initial"}
-          custom={1}
-          className="relative z-50"
-        >
-          <Star
-            size={32}
-            fill={getColor("var(--secondary)")}
-            className="-mt-2"
-            stroke={isGrayscale ? "#808080" : "black"}
-            strokeWidth={0.3}
-          />
-        </motion.div>
-        <motion.div
-          variants={starVariants}
-          animate={isAnimating ? "animate" : "initial"}
-          custom={2}
-          className="relative z-30"
-        >
-          <Star
-            size={26}
-            fill={getColor("var(--secondary)")}
-            className="-ml-2 -mb-1.5"
-            stroke={isGrayscale ? "#808080" : "black"}
-            strokeWidth={0.3}
-          />
-        </motion.div>
+        {[0, 1, 2].map((index) => (
+          <motion.div
+            key={index}
+            variants={starVariants}
+            animate={isAnimating ? "animate" : "initial"}
+            custom={index}
+            className={cn("relative", index === 1 ? "z-50" : "z-30")}
+          >
+            <Star
+              size={starSizes[index]}
+              fill={getColor("var(--secondary)")}
+              className={cn(
+                index === 0 ? "-mr-1 -mb-0.5" : index === 1 ? "-mt-1" : "-ml-1 -mb-0.5",
+                size === "small" ? "scale-75" : ""
+              )}
+              stroke={isGrayscale ? "#808080" : "black"}
+              strokeWidth={0.3}
+            />
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 });
-
-export default PokerChip;

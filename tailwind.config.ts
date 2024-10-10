@@ -15,6 +15,7 @@ const config: Config = {
         backgroundDarker: "var(--backgroundDarker)",
         primary: {
           DEFAULT: "var(--primary)",
+          darker: "var(--primaryDarker)",
         },
         secondary: {
           DEFAULT: "var(--secondary)",

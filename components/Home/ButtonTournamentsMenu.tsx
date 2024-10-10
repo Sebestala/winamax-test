@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useBudget } from "@/context/BudgetContext";
 import { PokerChip } from "../ui/PokerChip";
+import { PokerChipToggle } from "./PokerChipToggle";
 
 export function ButtonTournamentsMenu() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -72,9 +73,10 @@ export function ButtonTournamentsMenu() {
               >
                 <X size={24} />
               </button>
-              <h2 className="text-2xl font-archivoBold text-textColor mb-4">
-                Filtre Triple Tournoi
-              </h2>
+              <div className="flex items-center space-x-4 mb-4">
+                <h2 className="text-3xl font-archivoBold text-textColor">Triple Tournois</h2>
+                <PokerChipToggle onChange={() => {}} />
+              </div>
               <p className="text-sm text-textColor font-archivo mb-4">
                 Entrez votre fourchette de budget pour trouver les triplets de tournois parfaits
                 pour vous !
