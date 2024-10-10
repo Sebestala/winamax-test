@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { TopNavBar, BottomNavBar } from "@/components/index";
 import { AnimationProvider } from "../context/AnimationContext";
+import { BudgetProvider } from "../context/BudgetContext";
 
 const archivoBold = localFont({
   src: "./fonts/ArchivoNarrow-Bold.ttf",
@@ -42,7 +43,9 @@ export default function RootLayout({
         className={`${archivoBold.variable} ${archivoRegular.variable} ${archivoMedium.variable} ${archivoSemiBold.variable} antialiased`}
       >
         <TopNavBar />
-        <AnimationProvider>{children}</AnimationProvider>
+        <BudgetProvider>
+          <AnimationProvider>{children}</AnimationProvider>
+        </BudgetProvider>
         <BottomNavBar />
       </body>
     </html>
