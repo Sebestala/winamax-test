@@ -6,11 +6,43 @@ import { X } from "lucide-react";
 import { useBudget } from "@/context/BudgetContext";
 import { PokerChip } from "../ui/PokerChip";
 import { PokerChipToggle } from "./PokerChipToggle";
+import { Button } from "../ui/button";
+import { useForm } from "react-hook-form";
+
+interface BudgetFormData {
+  minBudget: number;
+  maxBudget: number;
+}
 
 export function ButtonTournamentsMenu() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const { minBudget, maxBudget, setMinBudget, setMaxBudget } = useBudget();
+  const {
+    minBudget,
+    maxBudget,
+    setMinBudget,
+    setMaxBudget,
+    isTripleTournaments,
+    setIsTripleTournaments,
+    toggleIsChangeBudget,
+  } = useBudget();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    trigger,
+  } = useForm<BudgetFormData>({
+    defaultValues: {
+      minBudget: minBudget,
+      maxBudget: maxBudget,
+    },
+    mode: "onChange",
+  });
+
+  const watchMinBudget = watch("minBudget");
+  const watchMaxBudget = watch("maxBudget");
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,6 +58,13 @@ export function ButtonTournamentsMenu() {
   }, []);
 
   const togglePanel = () => setIsPanelOpen(!isPanelOpen);
+
+  const onValidSubmit = (data: BudgetFormData) => {
+    setMinBudget(data.minBudget);
+    setMaxBudget(data.maxBudget);
+    toggleIsChangeBudget();
+    togglePanel();
+  };
 
   return (
     <div className="relative">
@@ -75,13 +114,16 @@ export function ButtonTournamentsMenu() {
               </button>
               <div className="flex items-center space-x-4 mb-4">
                 <h2 className="text-3xl font-archivoBold text-textColor">Triple Tournois</h2>
-                <PokerChipToggle onChange={() => {}} />
+                <PokerChipToggle onChange={() => setIsTripleTournaments(!isTripleTournaments)} />
               </div>
               <p className="text-sm text-textColor font-archivo mb-4">
                 Entrez votre fourchette de budget pour trouver les triplets de tournois parfaits
                 pour vous !
               </p>
-              <div className="space-y-4">
+              <form
+                onSubmit={handleSubmit(onValidSubmit)}
+                className="space-y-4"
+              >
                 <div className="flex items-center space-x-4">
                   <div className="w-1/2">
                     <label
@@ -93,11 +135,22 @@ export function ButtonTournamentsMenu() {
                     <input
                       type="number"
                       id="minBudget"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      {...register("minBudget", {
+                        required: "Ce champ est requis",
+                        min: { value: 1, message: "Le budget minimum doit être d'au moins 1€" },
+                        max: {
+                          value: 10000,
+                          message: "Le budget minimum ne peut pas dépasser 10 000€",
+                        },
+                        validate: (value) =>
+                          Number(value) <= Number(watchMaxBudget) ||
+                          "Le budget minimum ne peut pas être supérieur au budget maximum",
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="1 €"
-                      min={1}
-                      value={minBudget}
-                      onChange={(e) => setMinBudget(Number(e.target.value))}
+                      onChange={() => {
+                        trigger("maxBudget");
+                      }}
                     />
                   </div>
                   <div className="w-1/2">
@@ -110,18 +163,38 @@ export function ButtonTournamentsMenu() {
                     <input
                       type="number"
                       id="maxBudget"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      {...register("maxBudget", {
+                        required: "Ce champ est requis",
+                        min: { value: 1, message: "Le budget maximum doit être d'au moins 1€" },
+                        max: {
+                          value: 10000,
+                          message: "Le budget maximum ne peut pas dépasser 10 000€",
+                        },
+                        validate: (value) =>
+                          Number(value) >= Number(watchMinBudget) ||
+                          "Le budget maximum ne peut pas être inférieur au budget minimum",
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="10 000 €"
-                      min={1}
-                      value={maxBudget}
-                      onChange={(e) => setMaxBudget(Number(e.target.value))}
+                      onChange={() => {
+                        trigger("minBudget");
+                      }}
                     />
                   </div>
                 </div>
-                {/* <button className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300 ease-in-out font-archivoSemiBold">
+                {errors.minBudget && (
+                  <p className="text-red-500 text-xs mt-1">{errors.minBudget.message}</p>
+                )}
+                {errors.maxBudget && (
+                  <p className="text-red-500 text-xs mt-1">{errors.maxBudget.message}</p>
+                )}
+                <Button
+                  type="submit"
+                  className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary/90 font-archivoSemiBold"
+                >
                   Trouver les Tournois
-                </button> */}
-              </div>
+                </Button>
+              </form>
             </motion.div>
           </div>
         )}

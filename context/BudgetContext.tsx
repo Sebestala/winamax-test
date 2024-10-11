@@ -1,12 +1,16 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode, useCallback } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface BudgetContextType {
   minBudget: number;
   maxBudget: number;
   setMinBudget: (value: number) => void;
   setMaxBudget: (value: number) => void;
+  isTripleTournaments: boolean;
+  setIsTripleTournaments: (value: boolean) => void;
+  isChangeBudget: boolean;
+  toggleIsChangeBudget: () => void;
 }
 
 const BudgetContext = createContext<BudgetContextType | undefined>(undefined);
@@ -14,28 +18,24 @@ const BudgetContext = createContext<BudgetContextType | undefined>(undefined);
 export const BudgetProvider = ({ children }: { children: ReactNode }) => {
   const [minBudget, setMinBudget] = useState<number>(1);
   const [maxBudget, setMaxBudget] = useState<number>(10000);
+  const [isTripleTournaments, setIsTripleTournaments] = useState<boolean>(false);
+  const [isChangeBudget, setIsChangeBudget] = useState<boolean>(false);
 
-  const debounce = <T extends (...args: never[]) => void>(func: T, delay: number) => {
-    let timeoutId: NodeJS.Timeout;
-    return (...args: Parameters<T>) => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
+  const toggleIsChangeBudget = () => {
+    setIsChangeBudget(!isChangeBudget);
   };
-
-  // Debounced setters, enlever useCallback et tester
-  const debouncedSetMinBudget = useCallback(debounce(setMinBudget, 500), []);
-  const debouncedSetMaxBudget = useCallback(debounce(setMaxBudget, 500), []);
 
   return (
     <BudgetContext.Provider
       value={{
         minBudget,
         maxBudget,
-        setMinBudget: debouncedSetMinBudget,
-        setMaxBudget: debouncedSetMaxBudget,
+        setMinBudget,
+        setMaxBudget,
+        isTripleTournaments,
+        setIsTripleTournaments,
+        isChangeBudget,
+        toggleIsChangeBudget,
       }}
     >
       {children}
