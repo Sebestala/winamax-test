@@ -1,14 +1,18 @@
+"use client";
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { PokerChip } from "@/components/ui/PokerChip";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
+import { useBudget } from "@/context/BudgetContext";
 
 interface PokerChipToggleProps {
   onChange: (isActive: boolean) => void;
 }
 
 export function PokerChipToggle({ onChange }: PokerChipToggleProps) {
-  const [isActive, setIsActive] = useState(false);
+  const { isTripleTournaments } = useBudget();
+  const [isActive, setIsActive] = useState(isTripleTournaments);
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
