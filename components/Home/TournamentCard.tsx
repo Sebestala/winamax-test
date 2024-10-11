@@ -44,7 +44,10 @@ export const TournamentCard = memo(
     );
   },
   (prevProps, nextProps) => {
-    return prevProps.isSelected === nextProps.isSelected;
+    return (
+      prevProps.isSelected === nextProps.isSelected &&
+      prevProps.tournament.tournamentId === nextProps.tournament.tournamentId
+    );
   }
 );
 

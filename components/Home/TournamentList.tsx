@@ -6,7 +6,7 @@ import tournaments from "@/data/sample-poker.json";
 import { useAnimation } from "@/context/AnimationContext";
 import { useBudget } from "@/context/BudgetContext";
 import { Tournament } from "@/types/Tournaments";
-import { filterTournaments } from "@/app/filter-tournaments-algorithm";
+import { filterTournaments } from "@/app/filterTournamentsAlgorithm";
 
 const MAX_SELECTION = 99;
 const MAX_SELECTION_TRIPLE_TOURNAMENT = 3;
@@ -57,23 +57,21 @@ export const TournamentList = memo(function TournamentList() {
       }
     };
 
+    const loadMoreTripleTournaments = () => {
+      const start = tripleTournamentsDisplayed.length;
+      const newTournaments = tripleTournamentsList.slice(start, start + 20);
+      if (newTournaments.length === 0) {
+        setHasMore(false);
+      } else {
+        setTripleTournamentsDisplayed([...tripleTournamentsDisplayed, ...newTournaments]);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           if (isTripleTournaments) {
-            const firstSelectedTT = tripleTournamentsList[selectedIDs?.[0]] || null;
-            const secondSelectedTT = tripleTournamentsList[selectedIDs?.[1]] || null;
-            const newTripleTournamentsList = filterTournaments(
-              dataTripleTournaments,
-              firstSelectedTT,
-              secondSelectedTT,
-              minBudget,
-              maxBudget
-            );
-            setTripleTournamentsDisplayed((prev) => [
-              ...prev,
-              ...newTripleTournamentsList.slice(prev.length, prev.length + 20),
-            ]);
+            loadMoreTripleTournaments();
           } else {
             loadMoreTournaments();
           }
@@ -91,19 +89,34 @@ export const TournamentList = memo(function TournamentList() {
         observer.unobserve(observerTarget.current);
       }
     };
-  }, [observerTarget, tournamentsList]);
+  }, [observerTarget, tournamentsList, tripleTournamentsDisplayed]);
 
   useEffect(() => {
     if (isTripleTournaments) {
-      const firstSelectedTT = tripleTournamentsDisplayed[selectedIDs?.[0]] || null;
-      const secondSelectedTT = tripleTournamentsDisplayed[selectedIDs?.[1]] || null;
+      let firstSelectedTT: Tournament | null = null;
+      if (selectedIDs.length > 0) {
+        firstSelectedTT =
+          tripleTournamentsDisplayed.find((t) => t.tournamentId === selectedIDs[0]) || null;
+      }
+      let secondSelectedTT: Tournament | null = null;
+      if (selectedIDs.length > 1) {
+        secondSelectedTT =
+          tripleTournamentsDisplayed.find((t) => t.tournamentId === selectedIDs[1]) || null;
+      }
+
+      console.log("firstSelectedTT = ", firstSelectedTT);
+      console.log("secondSelectedTT = ", secondSelectedTT);
+
       const newTripleTournamentsList = filterTournaments(
         dataTripleTournaments,
-        firstSelectedTT,
-        secondSelectedTT,
         minBudget,
-        maxBudget
+        maxBudget,
+        firstSelectedTT,
+        secondSelectedTT
       );
+
+      console.log("newTripleTournamentsList 2 = ", newTripleTournamentsList);
+
       setTripleTournamentsList(newTripleTournamentsList);
       setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
     }
@@ -115,13 +128,14 @@ export const TournamentList = memo(function TournamentList() {
       setSelectedIDs([]);
       const newTripleTournamentsList = filterTournaments(
         dataTripleTournaments,
-        null,
-        null,
         minBudget,
         maxBudget
       );
+      // console.log("newTripleTournamentsList 1 = ", newTripleTournamentsList);
+
       setTripleTournamentsList(newTripleTournamentsList);
       setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
+      // console.log("tripleTournamentsDisplayed 1 = ", tripleTournamentsDisplayed.length);
     } else {
       setMaxNbTournamentsSelected(MAX_SELECTION);
       setSelectedIDs([]);
@@ -133,6 +147,10 @@ export const TournamentList = memo(function TournamentList() {
       {isTripleTournaments
         ? tripleTournamentsDisplayed.map((t) => {
             const isSelected = selectedIDs.includes(t.tournamentId);
+            if (selectedIDs.length === 3 && !isSelected) {
+              return <></>;
+            }
+
             return (
               <TournamentCard
                 key={t.tournamentId}
