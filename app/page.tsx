@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TournamentList, TokenAnimation, ButtonTournamentsMenu } from "@/components/index";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 const InfoClass = "justify-self-end text-xs font-archivoBold mr-2";
 

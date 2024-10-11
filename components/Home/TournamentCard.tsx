@@ -1,8 +1,8 @@
 import { memo } from "react";
 import Image from "next/image";
 import { Tournament } from "@/types/Tournaments";
-import { formatDateSimulated } from "@/lib/date";
-import { cn } from "@/lib/utils";
+import { formatDateSimulated } from "@/utils/date";
+import { cn } from "@/utils/utils";
 
 const InfoClass = "justify-self-end text-xs font-archivo mr-2";
 
