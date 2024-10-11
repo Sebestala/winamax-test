@@ -9,7 +9,7 @@ const InfoClass = "justify-self-end text-xs font-archivo mr-2";
 interface TournamentCardProps {
   tournament: Tournament;
   isSelected: boolean;
-  toggleTournamentSelection: (tournamentId: string) => void;
+  toggleTournamentSelection: (tournamentId: number) => void;
 }
 
 export const TournamentCard = memo(
@@ -29,7 +29,7 @@ export const TournamentCard = memo(
           style={{
             boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.15)",
           }}
-          onClick={() => toggleTournamentSelection(tournament.tournamentId.toString())}
+          onClick={() => toggleTournamentSelection(tournament.tournamentId)}
         >
           <div className="flex flex-col justify-between h-full">
             <FlagAndNameAndSelectedIcon

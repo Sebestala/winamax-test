@@ -15,21 +15,28 @@ export function filterTournaments(
   });
 
   const validTournaments = [];
+  console.log("0");
+  console.log("firstSelectedTT = ", firstSelectedTT ? firstSelectedTT : null);
 
   if (!firstSelectedTT && !secondSelectedTT) {
     for (let i = 0; i < tournamentSortedByDate.length; i++) {
       const tournament = tournamentSortedByDate[i];
 
-      if (tournament.buyIn <= maxBudget) {
+      if (tournament.buyIn < maxBudget) {
         validTournaments.push(tournament);
       }
     }
   } else if (firstSelectedTT && !secondSelectedTT) {
     for (let i = 0; i < tournamentSortedByDate.length; i++) {
       const t = tournamentSortedByDate[i];
+      console.log("2");
+      if (t.tournamentId === firstSelectedTT.tournamentId) validTournaments.push(t);
       const dateDiff = Math.abs(
         new Date(t.startDate).getTime() - new Date(firstSelectedTT.startDate).getTime()
       );
+      console.log(firstSelectedTT.startDate);
+      console.log("hello");
+
       if (dateDiff >= ONE_HOUR_IN_MS && t.buyIn <= maxBudget) {
         validTournaments.push(t);
       }
@@ -37,6 +44,12 @@ export function filterTournaments(
   } else if (firstSelectedTT && secondSelectedTT) {
     for (let i = 0; i < tournamentSortedByDate.length; i++) {
       const t = tournamentSortedByDate[i];
+      if (
+        t.tournamentId === firstSelectedTT.tournamentId ||
+        t.tournamentId === secondSelectedTT.tournamentId
+      )
+        validTournaments.push(t);
+
       const dateDiff = Math.abs(
         new Date(t.startDate).getTime() - new Date(secondSelectedTT.startDate).getTime()
       );

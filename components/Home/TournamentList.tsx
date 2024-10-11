@@ -12,7 +12,7 @@ const MAX_SELECTION = 99;
 const MAX_SELECTION_TRIPLE_TOURNAMENT = 3;
 
 export const TournamentList = memo(function TournamentList() {
-  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
+  const [selectedIDs, setSelectedIDs] = useState<number[]>([]);
   const [maxNbTournamentsSelected, setMaxNbTournamentsSelected] = useState<number>(MAX_SELECTION);
   const [tournamentsList, setTournamentsList] = useState<Tournament[]>(tournaments.slice(0, 20));
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -24,18 +24,25 @@ export const TournamentList = memo(function TournamentList() {
   const [tripleTournamentsList, setTripleTournamentsList] = useState<Tournament[]>([]);
   const [tripleTournamentsDisplayed, setTripleTournamentsDisplayed] = useState<Tournament[]>([]);
 
-  const toggleTournamentSelection = (index: number) => {
-    setSelectedIndexes((prevSelected) => {
-      if (prevSelected.includes(index)) {
-        return prevSelected.filter((i) => i !== index);
+  const toggleTournamentSelection = (tournamentId: number) => {
+    setSelectedIDs((prevSelected) => {
+      if (prevSelected.includes(tournamentId)) {
+        return prevSelected.filter((i) => i !== tournamentId);
       } else if (prevSelected.length < maxNbTournamentsSelected) {
-        return [...prevSelected, index];
+        return [...prevSelected, tournamentId];
       }
       return prevSelected;
     });
+    console.log(selectedIDs);
 
-    if (!selectedIndexes.includes(index) && selectedIndexes.length < maxNbTournamentsSelected) {
-      toggleAnimation(tournaments[index].prizepool);
+    if (!selectedIDs.includes(tournamentId) && selectedIDs.length < maxNbTournamentsSelected) {
+      if (isTripleTournaments) {
+        const index = tripleTournamentsList.findIndex((t) => t.tournamentId === tournamentId);
+        toggleAnimation(tripleTournamentsList[index].prizepool);
+      } else {
+        const index = tournaments.findIndex((t) => t.tournamentId === tournamentId);
+        toggleAnimation(tournaments[index].prizepool);
+      }
     }
   };
 
@@ -54,8 +61,8 @@ export const TournamentList = memo(function TournamentList() {
       (entries) => {
         if (entries[0].isIntersecting) {
           if (isTripleTournaments) {
-            const firstSelectedTT = tripleTournamentsList[selectedIndexes?.[0]] || null;
-            const secondSelectedTT = tripleTournamentsList[selectedIndexes?.[1]] || null;
+            const firstSelectedTT = tripleTournamentsList[selectedIDs?.[0]] || null;
+            const secondSelectedTT = tripleTournamentsList[selectedIDs?.[1]] || null;
             const newTripleTournamentsList = filterTournaments(
               dataTripleTournaments,
               firstSelectedTT,
@@ -88,9 +95,24 @@ export const TournamentList = memo(function TournamentList() {
 
   useEffect(() => {
     if (isTripleTournaments) {
-      setMaxNbTournamentsSelected(MAX_SELECTION_TRIPLE_TOURNAMENT);
-      setSelectedIndexes([]);
+      const firstSelectedTT = tripleTournamentsDisplayed[selectedIDs?.[0]] || null;
+      const secondSelectedTT = tripleTournamentsDisplayed[selectedIDs?.[1]] || null;
+      const newTripleTournamentsList = filterTournaments(
+        dataTripleTournaments,
+        firstSelectedTT,
+        secondSelectedTT,
+        minBudget,
+        maxBudget
+      );
+      setTripleTournamentsList(newTripleTournamentsList);
+      setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
+    }
+  }, [selectedIDs.length]);
 
+  useEffect(() => {
+    if (isTripleTournaments) {
+      setMaxNbTournamentsSelected(MAX_SELECTION_TRIPLE_TOURNAMENT);
+      setSelectedIDs([]);
       const newTripleTournamentsList = filterTournaments(
         dataTripleTournaments,
         null,
@@ -100,35 +122,34 @@ export const TournamentList = memo(function TournamentList() {
       );
       setTripleTournamentsList(newTripleTournamentsList);
       setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
-      console.log("je suis là");
     } else {
       setMaxNbTournamentsSelected(MAX_SELECTION);
-      setSelectedIndexes([]);
+      setSelectedIDs([]);
     }
   }, [isTripleTournaments, isChangeBudget]);
 
   return (
     <>
       {isTripleTournaments
-        ? tripleTournamentsDisplayed.map((tournament, index) => {
-            const isSelected = selectedIndexes.includes(index);
+        ? tripleTournamentsDisplayed.map((t) => {
+            const isSelected = selectedIDs.includes(t.tournamentId);
             return (
               <TournamentCard
-                key={tournament.tournamentId}
-                tournament={tournament}
+                key={t.tournamentId}
+                tournament={t}
                 isSelected={isSelected}
-                toggleTournamentSelection={() => toggleTournamentSelection(index)}
+                toggleTournamentSelection={toggleTournamentSelection}
               />
             );
           })
-        : tournamentsList.map((tournament, index) => {
-            const isSelected = selectedIndexes.includes(index);
+        : tournamentsList.map((t) => {
+            const isSelected = selectedIDs.includes(t.tournamentId);
             return (
               <TournamentCard
-                key={tournament.tournamentId}
-                tournament={tournament}
+                key={t.tournamentId}
+                tournament={t}
                 isSelected={isSelected}
-                toggleTournamentSelection={() => toggleTournamentSelection(index)}
+                toggleTournamentSelection={toggleTournamentSelection}
               />
             );
           })}
