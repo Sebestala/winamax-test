@@ -6,7 +6,6 @@ import { X } from "lucide-react";
 import { useBudget } from "@/context/BudgetContext";
 import { PokerChip } from "../ui/PokerChip";
 import { PokerChipToggle } from "./PokerChipToggle";
-import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 
 interface BudgetFormData {
@@ -188,12 +187,12 @@ export function ButtonTournamentsMenu() {
                 {errors.maxBudget && (
                   <p className="text-red-500 text-xs mt-1">{errors.maxBudget.message}</p>
                 )}
-                <Button
+                <button
                   type="submit"
                   className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary/90 font-archivoSemiBold"
                 >
                   Trouver les Tournois
-                </Button>
+                </button>
               </form>
             </motion.div>
           </div>
