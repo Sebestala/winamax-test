@@ -19,19 +19,19 @@ export const TournamentCard = memo(
     toggleTournamentSelection,
   }: TournamentCardProps) {
     return (
-      <div className="w-full max-w-screen-sm mx-auto relative">
+      <div className="relative mx-auto w-full max-w-screen-sm">
         {tournament.highlighted && <HighlightCard />}
         <div
           className={cn(
-            "bg-foreground rounded-2xl h-16 relative top-0 left-0 right-0 cursor-pointer",
-            isSelected ? "outline outline-2 outline-selected" : ""
+            "relative left-0 right-0 top-0 h-16 cursor-pointer rounded-2xl bg-foreground",
+            isSelected ? "outline outline-2 outline-selected" : "",
           )}
           style={{
             boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.15)",
           }}
           onClick={() => toggleTournamentSelection(tournament.tournamentId)}
         >
-          <div className="flex flex-col justify-between h-full">
+          <div className="flex h-full flex-col justify-between">
             <FlagAndNameAndSelectedIcon
               flag={tournament.flag}
               name={tournament.name}
@@ -48,14 +48,14 @@ export const TournamentCard = memo(
       prevProps.isSelected === nextProps.isSelected &&
       prevProps.tournament.tournamentId === nextProps.tournament.tournamentId
     );
-  }
+  },
 );
 
 function HighlightCard() {
   return (
     <div className="mt-8">
-      <div className="bg-secondary px-4 rounded-2xl h-16 absolute -top-5 left-0 right-0">
-        <h3 className="text-textColor font-archivoBold text-sm">TOP TOURNOI</h3>
+      <div className="absolute -top-5 left-0 right-0 h-16 rounded-2xl bg-secondary px-4">
+        <h3 className="font-archivoBold text-sm text-textColor">TOP TOURNOI</h3>
       </div>
     </div>
   );
@@ -71,10 +71,10 @@ function FlagAndNameAndSelectedIcon({
   isSelected: boolean;
 }) {
   return (
-    <div className="relative ">
-      <div className="absolute w-full max-w-screen-md mx-auto top-1 -left-2 flex items-center gap-3">
+    <div className="relative">
+      <div className="absolute -left-2 top-1 mx-auto flex w-full max-w-screen-md items-center gap-3">
         <div
-          className="bg-backgroundDarker rounded-full px-2.5 py-0.5"
+          className="rounded-full bg-backgroundDarker px-2.5 py-0.5"
           style={{
             boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.3)",
           }}
@@ -89,14 +89,11 @@ function FlagAndNameAndSelectedIcon({
         </div>
         <h2 className="flex-1 font-archivoBold text-lg">{name}</h2>
         {isSelected && (
-          <div className="flex items-center gap-1.5 bg-selected rounded-xl pl-0.5 pr-2 py-0.5">
-            <Image
-              src={`/assets/tick.svg`}
-              width={16}
-              height={16}
-              alt="tick"
-            />
-            <span className="font-archivoBold text-selected-foreground leading-none">IN</span>
+          <div className="flex items-center gap-1.5 rounded-xl bg-selected py-0.5 pl-0.5 pr-2">
+            <Image src={`/assets/tick.svg`} width={16} height={16} alt="tick" />
+            <span className="font-archivoBold leading-none text-selected-foreground">
+              IN
+            </span>
           </div>
         )}
       </div>
@@ -106,11 +103,11 @@ function FlagAndNameAndSelectedIcon({
 
 function TournamentInfo({ tournament }: { tournament: Tournament }) {
   return (
-    <div className="grid grid-cols-6 sm:grid-cols-7 font-archivoBold text-textColor px-2 py-2 rounded-xl bg-white items-center justify-center">
-      <span className="flex items-center font-archivoSemiBold text-xs whitespace-nowrap">
+    <div className="grid grid-cols-6 items-center justify-center rounded-xl bg-white px-2 py-2 font-archivoBold text-textColor sm:grid-cols-7">
+      <span className="flex items-center whitespace-nowrap font-archivoSemiBold text-xs">
         {formatDateSimulated(new Date(tournament.startDate))}
       </span>
-      <div className="sm:col-span-2 text-xs pl-4 flex items-center gap-0.5">
+      <div className="flex items-center gap-0.5 pl-4 text-xs sm:col-span-2">
         {tournament.icons.map((icon) => (
           <Image
             key={icon}
@@ -128,7 +125,7 @@ function TournamentInfo({ tournament }: { tournament: Tournament }) {
       <span
         className={cn(
           InfoClass,
-          "font-archivoSemiBold text-primary bg-backgroundDarker rounded-lg px-1 mr-0"
+          "mr-0 rounded-lg bg-backgroundDarker px-1 font-archivoSemiBold text-primary",
         )}
       >
         {tournament.prizepool.toLocaleString("fr-FR")} €

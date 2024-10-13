@@ -17,15 +17,15 @@ export const TokenAnimation = () => {
             <motion.div
               key={i}
               className={cn(
-                "absolute w-16 h-16",
+                "absolute h-16 w-16",
                 i % 4 === 0
                   ? "bg-primary"
                   : i % 4 === 1
-                  ? "bg-black"
-                  : i % 4 === 2
-                  ? "bg-green-700"
-                  : "bg-blue-700",
-                "rounded-full border-dashed border-8 border-white z-20 pointer-events-none"
+                    ? "bg-black"
+                    : i % 4 === 2
+                      ? "bg-green-700"
+                      : "bg-blue-700",
+                "pointer-events-none z-20 rounded-full border-8 border-dashed border-white",
               )}
               initial={{ top: -40, left: `${Math.random() * 100}%` }}
               animate={{

@@ -21,7 +21,7 @@ export function PokerChipToggle({ onChange }: PokerChipToggleProps) {
 
   return (
     <motion.div
-      className={cn("relative w-14 h-8 rounded-full p-1 cursor-pointer")}
+      className={cn("relative h-8 w-14 cursor-pointer rounded-full p-1")}
       style={{
         boxShadow: "0px 0px 0px 0.4px black, 0px 2px 6px rgba(0, 0, 0, 0.30)",
       }}
@@ -34,7 +34,7 @@ export function PokerChipToggle({ onChange }: PokerChipToggleProps) {
       }}
     >
       <motion.div
-        className="absolute top-1 left-1"
+        className="absolute left-1 top-1"
         animate={{
           x: isActive ? 24 : 0,
         }}

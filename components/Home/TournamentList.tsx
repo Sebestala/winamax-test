@@ -13,16 +13,24 @@ const MAX_SELECTION_TRIPLE_TOURNAMENT = 3;
 
 export const TournamentList = memo(function TournamentList() {
   const [selectedIDs, setSelectedIDs] = useState<number[]>([]);
-  const [maxNbTournamentsSelected, setMaxNbTournamentsSelected] = useState<number>(MAX_SELECTION);
-  const [tournamentsList, setTournamentsList] = useState<Tournament[]>(tournaments.slice(0, 20));
+  const [maxNbTournamentsSelected, setMaxNbTournamentsSelected] =
+    useState<number>(MAX_SELECTION);
+  const [tournamentsList, setTournamentsList] = useState<Tournament[]>(
+    tournaments.slice(0, 20),
+  );
   const [hasMore, setHasMore] = useState<boolean>(true);
   const { toggleAnimation } = useAnimation();
   const observerTarget = useRef(null);
   // Triple Tournament
-  const { isTripleTournaments, minBudget, maxBudget, isChangeBudget } = useBudget();
+  const { isTripleTournaments, minBudget, maxBudget, isChangeBudget } =
+    useBudget();
   const dataTripleTournaments: Tournament[] = tournaments.slice(0, 350);
-  const [tripleTournamentsList, setTripleTournamentsList] = useState<Tournament[]>([]);
-  const [tripleTournamentsDisplayed, setTripleTournamentsDisplayed] = useState<Tournament[]>([]);
+  const [tripleTournamentsList, setTripleTournamentsList] = useState<
+    Tournament[]
+  >([]);
+  const [tripleTournamentsDisplayed, setTripleTournamentsDisplayed] = useState<
+    Tournament[]
+  >([]);
 
   const toggleTournamentSelection = (tournamentId: number) => {
     setSelectedIDs((prevSelected) => {
@@ -34,12 +42,19 @@ export const TournamentList = memo(function TournamentList() {
       return prevSelected;
     });
 
-    if (!selectedIDs.includes(tournamentId) && selectedIDs.length < maxNbTournamentsSelected) {
+    if (
+      !selectedIDs.includes(tournamentId) &&
+      selectedIDs.length < maxNbTournamentsSelected
+    ) {
       if (isTripleTournaments) {
-        const index = tripleTournamentsList.findIndex((t) => t.tournamentId === tournamentId);
+        const index = tripleTournamentsList.findIndex(
+          (t) => t.tournamentId === tournamentId,
+        );
         toggleAnimation(tripleTournamentsList[index].prizepool);
       } else {
-        const index = tournaments.findIndex((t) => t.tournamentId === tournamentId);
+        const index = tournaments.findIndex(
+          (t) => t.tournamentId === tournamentId,
+        );
         toggleAnimation(tournaments[index].prizepool);
       }
     }
@@ -62,7 +77,10 @@ export const TournamentList = memo(function TournamentList() {
       if (newTournaments.length === 0) {
         setHasMore(false);
       } else {
-        setTripleTournamentsDisplayed([...tripleTournamentsDisplayed, ...newTournaments]);
+        setTripleTournamentsDisplayed([
+          ...tripleTournamentsDisplayed,
+          ...newTournaments,
+        ]);
       }
     };
 
@@ -76,7 +94,7 @@ export const TournamentList = memo(function TournamentList() {
           }
         }
       },
-      { threshold: 1 }
+      { threshold: 1 },
     );
 
     if (observerTarget.current) {
@@ -95,12 +113,16 @@ export const TournamentList = memo(function TournamentList() {
       let firstSelectedTT: Tournament | null = null;
       if (selectedIDs.length > 0) {
         firstSelectedTT =
-          tripleTournamentsDisplayed.find((t) => t.tournamentId === selectedIDs[0]) || null;
+          tripleTournamentsDisplayed.find(
+            (t) => t.tournamentId === selectedIDs[0],
+          ) || null;
       }
       let secondSelectedTT: Tournament | null = null;
       if (selectedIDs.length > 1) {
         secondSelectedTT =
-          tripleTournamentsDisplayed.find((t) => t.tournamentId === selectedIDs[1]) || null;
+          tripleTournamentsDisplayed.find(
+            (t) => t.tournamentId === selectedIDs[1],
+          ) || null;
       }
 
       const newTripleTournamentsList = filterTournaments(
@@ -108,7 +130,7 @@ export const TournamentList = memo(function TournamentList() {
         minBudget,
         maxBudget,
         firstSelectedTT,
-        secondSelectedTT
+        secondSelectedTT,
       );
 
       setTripleTournamentsList(newTripleTournamentsList);
@@ -124,7 +146,7 @@ export const TournamentList = memo(function TournamentList() {
       const newTripleTournamentsList = filterTournaments(
         dataTripleTournaments,
         minBudget,
-        maxBudget
+        maxBudget,
       );
 
       setTripleTournamentsList(newTripleTournamentsList);
@@ -167,10 +189,10 @@ export const TournamentList = memo(function TournamentList() {
 
       {hasMore && (
         <div
-          className="flex justify-center items-center mt-4"
+          className="mt-4 flex items-center justify-center"
           ref={observerTarget}
         >
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
         </div>
       )}
     </>

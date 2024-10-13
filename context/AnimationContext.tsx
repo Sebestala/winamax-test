@@ -8,7 +8,9 @@ interface AnimationContextType {
   prizepool: number;
 }
 
-const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
+const AnimationContext = createContext<AnimationContextType | undefined>(
+  undefined,
+);
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -26,7 +28,9 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AnimationContext.Provider value={{ isAnimating, toggleAnimation, prizepool }}>
+    <AnimationContext.Provider
+      value={{ isAnimating, toggleAnimation, prizepool }}
+    >
       {children}
     </AnimationContext.Provider>
   );

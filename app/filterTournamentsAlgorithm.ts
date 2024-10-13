@@ -5,7 +5,7 @@ export function filterTournaments(
   minBudget: number,
   maxBudget: number,
   selectedTournament: Tournament | null = null,
-  secondSelectedTournament: Tournament | null = null
+  secondSelectedTournament: Tournament | null = null,
 ) {
   // Helper function to check if two tournaments are compatible (at least 1 hour apart)
   function areCompatible(t1: Tournament, t2: Tournament) {
@@ -25,11 +25,13 @@ export function filterTournaments(
     validTournaments = tournaments.filter(
       (t) =>
         t.tournamentId === selectedTournament.tournamentId ||
-        (areCompatible(selectedTournament, t) && selectedTournament.buyIn + t.buyIn <= maxBudget)
+        (areCompatible(selectedTournament, t) &&
+          selectedTournament.buyIn + t.buyIn <= maxBudget),
     );
   } else if (selectedTournament && secondSelectedTournament) {
     // Find compatible tournaments to complete the triplet
-    const currentTotal = selectedTournament.buyIn + secondSelectedTournament.buyIn;
+    const currentTotal =
+      selectedTournament.buyIn + secondSelectedTournament.buyIn;
     validTournaments = tournaments.filter(
       (t) =>
         t.tournamentId === selectedTournament.tournamentId ||
@@ -37,7 +39,7 @@ export function filterTournaments(
         (areCompatible(selectedTournament, t) &&
           areCompatible(secondSelectedTournament, t) &&
           currentTotal + t.buyIn >= minBudget &&
-          currentTotal + t.buyIn <= maxBudget)
+          currentTotal + t.buyIn <= maxBudget),
     );
   }
 

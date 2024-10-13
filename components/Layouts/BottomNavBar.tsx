@@ -10,14 +10,14 @@ export const BottomNavBar = () => {
   const router = useRouter();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 z-50">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-300 bg-white">
       <div className="flex justify-around">
         <button
           onClick={() => {
             setActiveTab("home");
             router.push("/");
           }}
-          className={`flex flex-col items-center py-2 px-4 text-textColor`}
+          className={`flex flex-col items-center px-4 py-2 text-textColor`}
           aria-label="Home link"
         >
           <Image
@@ -36,7 +36,9 @@ export const BottomNavBar = () => {
           <span
             className={cn(
               "leading-none",
-              activeTab === "home" ? "font-archivoSemiBold" : "font-archivoMedium"
+              activeTab === "home"
+                ? "font-archivoSemiBold"
+                : "font-archivoMedium",
             )}
           >
             Home
@@ -47,7 +49,7 @@ export const BottomNavBar = () => {
             setActiveTab("readme");
             router.push("/readme");
           }}
-          className={`flex flex-col items-center py-2 px-4 text-textColor`}
+          className={`flex flex-col items-center px-4 py-2 text-textColor`}
           aria-label="Readme link"
         >
           <Image
@@ -66,7 +68,9 @@ export const BottomNavBar = () => {
           <span
             className={cn(
               "leading-none",
-              activeTab === "readme" ? "font-archivoSemiBold" : "font-archivoMedium"
+              activeTab === "readme"
+                ? "font-archivoSemiBold"
+                : "font-archivoMedium",
             )}
           >
             Readme

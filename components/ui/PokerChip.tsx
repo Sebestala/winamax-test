@@ -10,7 +10,11 @@ interface PokerChipProps {
 }
 
 export const PokerChip = memo(
-  function PokerChip({ isAnimating = true, isGrayscale = false, size = "large" }: PokerChipProps) {
+  function PokerChip({
+    isAnimating = true,
+    isGrayscale = false,
+    size = "large",
+  }: PokerChipProps) {
     const starVariants = {
       animate: (i: number) => ({
         scale: [1, 1.2, 1],
@@ -38,10 +42,10 @@ export const PokerChip = memo(
     return (
       <div
         className={cn(
-          "rounded-full flex items-center justify-center text-white border-dashed",
+          "flex items-center justify-center rounded-full border-dashed text-white",
           sizeClasses,
           borderClasses,
-          isGrayscale ? "border-gray-300" : "border-white"
+          isGrayscale ? "border-gray-300" : "border-white",
         )}
         style={{
           backgroundColor: getColor("var(--primary)"),
@@ -63,8 +67,12 @@ export const PokerChip = memo(
                 size={starSizes[index]}
                 fill={getColor("var(--secondary)")}
                 className={cn(
-                  index === 0 ? "-mr-1 -mb-0.5" : index === 1 ? "-mt-1" : "-ml-1 -mb-0.5",
-                  size === "small" ? "scale-75" : ""
+                  index === 0
+                    ? "-mb-0.5 -mr-1"
+                    : index === 1
+                      ? "-mt-1"
+                      : "-mb-0.5 -ml-1",
+                  size === "small" ? "scale-75" : "",
                 )}
                 stroke={isGrayscale ? "#808080" : "black"}
                 strokeWidth={0.3}
@@ -81,5 +89,5 @@ export const PokerChip = memo(
       prevProps.isGrayscale === nextProps.isGrayscale &&
       prevProps.size === nextProps.size
     );
-  }
+  },
 );

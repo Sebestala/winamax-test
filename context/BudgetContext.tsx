@@ -18,7 +18,8 @@ const BudgetContext = createContext<BudgetContextType | undefined>(undefined);
 export const BudgetProvider = ({ children }: { children: ReactNode }) => {
   const [minBudget, setMinBudget] = useState<number>(1);
   const [maxBudget, setMaxBudget] = useState<number>(10000);
-  const [isTripleTournaments, setIsTripleTournaments] = useState<boolean>(false);
+  const [isTripleTournaments, setIsTripleTournaments] =
+    useState<boolean>(false);
   const [isChangeBudget, setIsChangeBudget] = useState<boolean>(false);
 
   const toggleIsChangeBudget = () => {

@@ -7,7 +7,7 @@ export default async function MarkdownPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto">
+      <div className="prose prose-sm mx-auto sm:prose lg:prose-lg xl:prose-xl">
         <ReactMarkdown>{markdownContent}</ReactMarkdown>
       </div>
     </div>
