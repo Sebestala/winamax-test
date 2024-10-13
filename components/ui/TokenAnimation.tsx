@@ -32,14 +32,14 @@ export const TokenAnimation = () => {
                 top: "100%",
                 rotate: 360 * Math.random(),
                 transition: {
-                  duration: 1.5 + Math.random() * 5,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  duration: 1 + Math.random() * 3,
+                  ease: [0.45, 0.45, 1, 1],
                 },
               }}
               exit={{
                 opacity: 0,
                 transition: {
-                  duration: 1.5,
+                  duration: 0.3,
                 },
               }}
               style={{}}

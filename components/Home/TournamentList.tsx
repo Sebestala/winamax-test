@@ -33,7 +33,6 @@ export const TournamentList = memo(function TournamentList() {
       }
       return prevSelected;
     });
-    console.log(selectedIDs);
 
     if (!selectedIDs.includes(tournamentId) && selectedIDs.length < maxNbTournamentsSelected) {
       if (isTripleTournaments) {
@@ -104,9 +103,6 @@ export const TournamentList = memo(function TournamentList() {
           tripleTournamentsDisplayed.find((t) => t.tournamentId === selectedIDs[1]) || null;
       }
 
-      console.log("firstSelectedTT = ", firstSelectedTT);
-      console.log("secondSelectedTT = ", secondSelectedTT);
-
       const newTripleTournamentsList = filterTournaments(
         dataTripleTournaments,
         minBudget,
@@ -115,10 +111,9 @@ export const TournamentList = memo(function TournamentList() {
         secondSelectedTT
       );
 
-      console.log("newTripleTournamentsList 2 = ", newTripleTournamentsList);
-
       setTripleTournamentsList(newTripleTournamentsList);
       setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
+      setHasMore(selectedIDs.length !== 3);
     }
   }, [selectedIDs.length]);
 
@@ -131,11 +126,9 @@ export const TournamentList = memo(function TournamentList() {
         minBudget,
         maxBudget
       );
-      // console.log("newTripleTournamentsList 1 = ", newTripleTournamentsList);
 
       setTripleTournamentsList(newTripleTournamentsList);
       setTripleTournamentsDisplayed(newTripleTournamentsList.slice(0, 20));
-      // console.log("tripleTournamentsDisplayed 1 = ", tripleTournamentsDisplayed.length);
     } else {
       setMaxNbTournamentsSelected(MAX_SELECTION);
       setSelectedIDs([]);
