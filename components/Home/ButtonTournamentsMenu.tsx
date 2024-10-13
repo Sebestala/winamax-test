@@ -5,7 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PokerChip } from "../ui/PokerChip";
 import { TournamentsMenu } from "./TounamentsMenu";
 import { useBudget } from "@/context/BudgetContext";
-export function ButtonTournamentsMenu() {
+
+/**
+ * Button component that toggles the visibility of the triple tournaments menu.
+ *
+ * @returns {JSX.Element} The rendered button component that animates and controls the tournaments menu.
+ *
+ * Features:
+ * - Displays a poker chip component that animates based on the budget context.
+ */
+export function ButtonTournamentsMenu(): JSX.Element {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const { isTripleTournaments } = useBudget();

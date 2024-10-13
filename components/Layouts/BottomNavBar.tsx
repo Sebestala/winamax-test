@@ -5,7 +5,15 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 
-export const BottomNavBar = () => {
+/**
+ * BottomNavBar component provides a fixed navigation bar at the bottom of the screen
+ *
+ * @returns {JSX.Element} The rendered bottom navigation bar component.
+ *
+ * Features:
+ * - Contains buttons for navigating to the Home and Readme sections.
+ */
+export const BottomNavBar = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("home");
   const router = useRouter();
 

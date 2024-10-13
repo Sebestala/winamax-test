@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { TournamentCard } from "./TournamentCard";
@@ -11,6 +12,17 @@ import { filterTournaments } from "@/app/filterTournamentsAlgorithm";
 const MAX_SELECTION = 99;
 const MAX_SELECTION_TRIPLE_TOURNAMENT = 3;
 
+/**
+ * TournamentList component displays a list of tournaments and manages the selection of tournaments by the user.
+ *
+ * @returns {JSX.Element} The rendered tournament list component.
+ *
+ * Features:
+ * - Allows users to select tournaments and limits the number of selections based on the mode (standard or triple tournaments).
+ * - Infinite scroll: Loads more tournaments as the user scrolls to the bottom of the list using an intersection observer.
+ * - Filters tournaments based on user-defined budget limits and selected tournaments in triple tournament mode.
+ * - Provides visual feedback during loading states.
+ */
 export const TournamentList = memo(function TournamentList() {
   const [selectedIDs, setSelectedIDs] = useState<number[]>([]);
   const [maxNbTournamentsSelected, setMaxNbTournamentsSelected] =

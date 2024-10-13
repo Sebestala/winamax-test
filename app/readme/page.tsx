@@ -2,8 +2,16 @@ import fs from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 
-export default async function MarkdownPage() {
-  const markdownContent = await getMarkdownContent();
+/**
+ * Asynchronously renders a Markdown page with the content of README.md.
+ *
+ * @returns {Promise<JSX.Element>} A promise that resolves to the rendered component containing the Markdown content.
+ *
+ * Features:
+ * - Retrieves the content of the "README.md" file from the root directory and display it as HTML page.
+ */
+export default async function MarkdownPage(): Promise<JSX.Element> {
+  const markdownContent: string = await getMarkdownContent();
 
   return (
     <div className="container mx-auto px-4 py-8">

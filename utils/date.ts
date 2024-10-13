@@ -36,6 +36,13 @@ function formatDate(date: Date): string {
   }
 }
 
+/**
+ * Formats a given date using a simulated current date for testing purposes.
+ * This function temporarily simulates the date before formatting and restores the original date afterward.
+ *
+ * @param {Date} date - The date to be formatted.
+ * @returns {string} The formatted date string in French locale based on the simulated date.
+ */
 export function formatDateSimulated(date: Date): string {
   simulateDate();
   const formattedDate = formatDate(date);

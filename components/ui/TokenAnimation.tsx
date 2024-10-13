@@ -2,9 +2,19 @@
 
 import { cn } from "@/utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAnimation } from "../../context/AnimationContext";
+import { useAnimation } from "@/context/AnimationContext";
 
-export const TokenAnimation = () => {
+/**
+ * TokenAnimation component displays animated tokens falling from the top of the screen.
+ * The number of tokens displayed is determined by the prize pool amount.
+ *
+ * @returns {JSX.Element} The rendered token animation component.
+ *
+ * Features:
+ * - Displays a variable number of tokens based on the prize pool value.
+ * - Each token has a unique color and falls from the top of the screen to the bottom.
+ */
+export const TokenAnimation = (): JSX.Element => {
   const { isAnimating, prizepool } = useAnimation();
   const nbTokenToDisplay =
     prizepool > 10000 ? 100 : prizepool > 1000 ? 50 : prizepool > 100 ? 25 : 10;

@@ -9,6 +9,22 @@ interface PokerChipProps {
   size?: "small" | "large";
 }
 
+/**
+ * PokerChip component represents a stylized poker chip with animated stars.
+ * It can be displayed in different sizes and color schemes (grayscale or colored).
+ *
+ * @param {Object} props - Component properties.
+ * @param {boolean} [props.isAnimating=true] - Determines whether the stars are animated.
+ * @param {boolean} [props.isGrayscale=false] - Determines whether the chip is displayed in grayscale.
+ * @param {"small" | "large"} [props.size="large"] - Size of the poker chip, either "small" or "large".
+ *
+ * @returns {JSX.Element} The rendered poker chip component.
+ *
+ * Features:
+ * - Contains three stars that animate when the `isAnimating` prop is true.
+ * - Supports grayscale rendering based on the `isGrayscale` prop.
+ * - Adjusts size based on the `size` prop.
+ */
 export const PokerChip = memo(
   function PokerChip({
     isAnimating = true,

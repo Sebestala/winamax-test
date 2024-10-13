@@ -1,5 +1,23 @@
 import { Tournament } from "@/types/Tournaments";
 
+const ONE_HOUR = 60 * 60 * 1000;
+
+/**
+ * Filters a list of tournaments based on budget and compatibility criteria.
+ *
+ * @param {Tournament[]} tournaments - An array of tournaments to filter.
+ * @param {number} minBudget - The minimum budget for the selected tournaments.
+ * @param {number} maxBudget - The maximum budget for the selected tournaments.
+ * @param {Tournament | null} [selectedTournament=null] - The first selected tournament, if any.
+ * @param {Tournament | null} [secondSelectedTournament=null] - The second selected tournament, if any.
+ * @returns {Tournament[]} An array of valid tournaments that meet the criteria.
+ *
+ * Features:
+ * - Filters tournaments by ensuring their buy-in amounts are within the specified budget.
+ * - Ensures selected tournaments are compatible (i.e., their start dates are at least one hour apart).
+ * - Allows for filtering based on one or two selected tournaments, accommodating various selection scenarios.
+ * - Sorts the resulting tournaments by their buy-in amounts in ascending order.
+ */
 export function filterTournaments(
   tournaments: Tournament[],
   minBudget: number,
@@ -7,21 +25,17 @@ export function filterTournaments(
   selectedTournament: Tournament | null = null,
   secondSelectedTournament: Tournament | null = null,
 ) {
-  // Helper function to check if two tournaments are compatible (at least 1 hour apart)
   function areCompatible(t1: Tournament, t2: Tournament) {
     const date1 = new Date(t1.startDate);
     const date2 = new Date(t2.startDate);
-    return Math.abs(date2.getTime() - date1.getTime()) >= 60 * 60 * 1000; // 1 hour in milliseconds
+    return Math.abs(date2.getTime() - date1.getTime()) >= ONE_HOUR;
   }
 
   let validTournaments: Tournament[] = [];
 
   if (!selectedTournament && !secondSelectedTournament) {
-    // Simply filter out tournaments that are too expensive
-
     validTournaments = tournaments.filter((t) => t.buyIn <= maxBudget);
   } else if (selectedTournament && !secondSelectedTournament) {
-    // Find compatible tournaments within budget
     validTournaments = tournaments.filter(
       (t) =>
         t.tournamentId === selectedTournament.tournamentId ||
@@ -29,7 +43,6 @@ export function filterTournaments(
           selectedTournament.buyIn + t.buyIn <= maxBudget),
     );
   } else if (selectedTournament && secondSelectedTournament) {
-    // Find compatible tournaments to complete the triplet
     const currentTotal =
       selectedTournament.buyIn + secondSelectedTournament.buyIn;
     validTournaments = tournaments.filter(
@@ -43,7 +56,6 @@ export function filterTournaments(
     );
   }
 
-  // Sort by buy-in (ascending)
   validTournaments.sort((a, b) => a.buyIn - b.buyIn);
 
   return validTournaments;

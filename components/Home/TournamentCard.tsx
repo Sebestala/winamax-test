@@ -12,12 +12,24 @@ interface TournamentCardProps {
   toggleTournamentSelection: (tournamentId: number) => void;
 }
 
+/**
+ * TournamentCard component displays information about a tournament and allows users to select it.
+ *
+ * @param {Tournament} tournament - The tournament data including details such as name, flags, and icons.
+ * @param {boolean} isSelected - Indicates if the tournament is currently selected.
+ * @param {function} toggleTournamentSelection - Function to toggle the selection state of the tournament based on its ID.
+ * @returns {JSX.Element} The rendered tournament card component.
+ *
+ * Features:
+ * - Displays tournament details including start date, player limits, and prize pool.
+ * - Provides visual feedback for selected tournaments with an outline and a tick mark.
+ */
 export const TournamentCard = memo(
   function TournamentCard({
     tournament,
     isSelected,
     toggleTournamentSelection,
-  }: TournamentCardProps) {
+  }: TournamentCardProps): JSX.Element {
     return (
       <div className="relative mx-auto w-full max-w-screen-sm">
         {tournament.highlighted && <HighlightCard />}

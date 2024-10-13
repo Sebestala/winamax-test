@@ -34,13 +34,14 @@ Pour lancer le projet, vous avez deux options :
 ## Choix Techniques
 
 - Next.JS: C'est performant, ça permet de facilement faire des server component, d'avoir un SEO
-  (référecnement google) excellent
+  (référecnement google) excellent. Utilisation de "use Client" pour les Client component. Les fichier page.tsx ainsi que l'architecture du dossier `app` sert à la navigation entre les pages.
 - TailwindCSS :Permet d'avoir facilement un design responsive , un design system, et de gagner en
   performance
 - Framer Motion : Permet d'avoir des animations fluides et de qualité
 - React Hook Form : Permet de gérer facilement les formulaires
 - date-fns : Pour la gestion des dates
 - sinon : Pour simuler une date
+- prettier: Pour avoir un code propre et homogène
 
 ## Notes
 
@@ -61,7 +62,6 @@ Pour lancer le projet, vous avez deux options :
 ## Pistes d'améliorations
 
 - Régler le problème des index.ts, pour ne plus à avoir à afficher index dans les paths
-- ⚠️ lint pour TW
 - ⚠️ Mettre de la doc
 - L'animation présente 1 défault, si on clique trop vite sur le bouton elle bug.
 - Amélioration: afficher une animation sur les cards lors du survol, lorsqu'elles
@@ -69,3 +69,6 @@ Pour lancer le projet, vous avez deux options :
 - Mettre des tests unitaires et/end to end
 - Mettre en place Storybook
 - Mise en place du cache avec Tanstack (React-Query)
+- Le fichier TournamentList est un peu long, il pourrait être amélioré.
+
+Parler de l'utilisation des context pour faciliter la gestion des données à travers le projet, eviter de rerendre certains composants inutilements.

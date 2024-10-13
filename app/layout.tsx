@@ -32,11 +32,23 @@ export const metadata: Metadata = {
   description: "Home page",
 };
 
+/**
+ * Root layout component for the application, wrapping the main content with navigation bars and context providers.
+ *
+ * @param {React.ReactNode} children - The child elements to render inside the layout.
+ * @returns {JSX.Element} The rendered component containing the top navigation bar, main content, and bottom navigation bar.
+ *
+ * Features:
+ * - Sets the HTML language attribute to French (`lang="fr"`).
+ * - Applies custom local fonts to the body using CSS variables for styling.
+ * - Wraps the main content in `BudgetProvider` and `AnimationProvider` for state management.
+ * - Includes top and bottom navigation bars for consistent navigation across the application.
+ */
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}): JSX.Element {
   return (
     <html lang="fr">
       <body

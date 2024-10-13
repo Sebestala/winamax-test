@@ -6,9 +6,14 @@ import {
 } from "@/components/index";
 import { cn } from "@/utils/utils";
 
-const InfoClass = "justify-self-end text-xs font-archivoBold sm:mr-2";
+/**
+ * Main component rendering the home page layout with tournaments information and animations.
+ *
+ * @returns {JSX.Element} The rendered component containing the tournament information, image, and menu button.
+ */
+export default function Home(): JSX.Element {
+  const InfoClass = "justify-self-end text-xs font-archivoBold sm:mr-2";
 
-export default function Component() {
   return (
     <div className="flex h-screen flex-col bg-gray-100">
       <main className="mb-16 mt-11 flex-1 overflow-y-auto p-4" id="home">
