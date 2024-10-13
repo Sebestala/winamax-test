@@ -43,6 +43,7 @@ export function TournamentsMenu({ togglePanel }: TournamentsMenuProps) {
   const watchMaxBudget = watch("maxBudget");
 
   const onValidSubmit = (data: BudgetFormData) => {
+    setIsTripleTournaments(true);
     setMinBudget(data.minBudget);
     setMaxBudget(data.maxBudget);
     toggleIsChangeBudget();

@@ -4,7 +4,7 @@ import { Tournament } from "@/types/Tournaments";
 import { formatDateSimulated } from "@/utils/date";
 import { cn } from "@/utils/utils";
 
-const InfoClass = "justify-self-end text-xs font-archivo mr-2";
+const InfoClass = "justify-self-end text-xs font-archivo sm:mr-2";
 
 interface TournamentCardProps {
   tournament: Tournament;
@@ -106,11 +106,11 @@ function FlagAndNameAndSelectedIcon({
 
 function TournamentInfo({ tournament }: { tournament: Tournament }) {
   return (
-    <div className="grid grid-cols-7 font-archivoBold text-textColor px-2 py-2 rounded-xl bg-white items-center justify-center">
-      <span className="flex items-center font-archivoSemiBold text-xs">
+    <div className="grid grid-cols-6 sm:grid-cols-7 font-archivoBold text-textColor px-2 py-2 rounded-xl bg-white items-center justify-center">
+      <span className="flex items-center font-archivoSemiBold text-xs whitespace-nowrap">
         {formatDateSimulated(new Date(tournament.startDate))}
       </span>
-      <div className="col-span-2 text-xs pl-4 flex items-center gap-0.5">
+      <div className="sm:col-span-2 text-xs pl-4 flex items-center gap-0.5">
         {tournament.icons.map((icon) => (
           <Image
             key={icon}

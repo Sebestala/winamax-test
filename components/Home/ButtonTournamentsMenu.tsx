@@ -4,10 +4,11 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PokerChip } from "../ui/PokerChip";
 import { TournamentsMenu } from "./TounamentsMenu";
-
+import { useBudget } from "@/context/BudgetContext";
 export function ButtonTournamentsMenu() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const { isTripleTournaments } = useBudget();
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +49,7 @@ export function ButtonTournamentsMenu() {
               exit={{ opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.2 }}
             >
-              <PokerChip />
+              <PokerChip isAnimating={isTripleTournaments} />
             </motion.div>
           </motion.div>
         </AnimatePresence>

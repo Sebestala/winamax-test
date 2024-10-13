@@ -5,7 +5,7 @@ import sinon from "sinon";
 let clock: sinon.SinonFakeTimers | null = null;
 
 function simulateDate() {
-  const targetDate: Date = new Date(2023, 9, 24);
+  const targetDate: Date = new Date(2023, 8, 18);
   if (clock) {
     clock.restore();
   }
