@@ -1,81 +1,65 @@
-# Test Poker Winamax - Sébastien Garcia
+# 🃏 Test Poker Winamax - Sébastien Garcia
 
-## Lancement du projet
+## 🚀 Lancement du projet
 
-Pour lancer le projet, vous avez deux options :
+Deux options pour démarrer le projet :
 
-1. Pour un environnement de production :
+1. Deux options pour démarrer le projet :
 
-   ```bash
-   npm run build
-   npm run start
-   # ou
-   yarn build
-   yarn start
-   # ou
-   pnpm build
-   pnpm start
-   # ou
-   bun build
-   bun start
-   ```
+```bash
+npm run build && npm run start
+# ou
+yarn build && yarn start
+# ou
+pnpm build && pnpm start
+# ou
+bun build && bun start
+```
 
-2. Pour un environnement de développement (si vous souhaitez faire des changements) :
-   ```bash
-   npm run dev
-   # ou
-   yarn dev
-   # ou
-   pnpm dev
-   # ou
-   bun dev
-   ```
+2. Environnement de développement (pour effectuer des modifications) :
 
-## Choix Techniques
+```bash
+npm run dev
+# ou
+yarn dev
+# ou
+pnpm dev
+# ou
+bun dev
+```
 
-- Next.JS: C'est performant, ça permet de facilement faire des server component, d'avoir un SEO
-  (référecnement google) excellent.
-- TailwindCSS :Permet d'avoir facilement un design responsive , un design system, et de gagner en
-  performance
-- Framer Motion : Permet d'avoir des animations fluides et de qualité
-- React Hook Form : Permet de gérer facilement les formulaires
-- date-fns : Pour la gestion des dates
-- sinon : Pour simuler une date
-- prettier: Pour avoir un code propre et homogène
+## 🛠️ Choix Techniques
 
-## Fonctionnalités
+- TailwindCSS : Facile à utiliser pour un design responsive, un design system, et des performances accrues.
+- Next.js : Performant avec un excellent SEO grâce aux Server Components.
+- Framer Motion : Pour des animations fluides et soignées.
+- React Hook Form : Simplifie la gestion des formulaires.
+- Prettier : Assure un code propre et homogène.
+- Sinon : Simulation des dates pour les tests.
+- date-fns : Gestion efficace des dates.
 
-- Pour la partie des Triplet Poker, j'ai d'abord opté pour afficher tous les triples tournois
-  possibles. De souvenir j'étais arrivé à plus de 5 millions de possibilités. Cette solution avait
-  deux problèmes selon moi. Le premier était pour les performance, j'ai commencé à résoudre ce
-  problème en faisant les calculs de manière incrémentiels, je m'arrétais tous les 20 résultats et
-  reprenait là où j'en étais. L'autre problème qui est encore plus important est que, selon moi,
-  cette solution n'est pas la bonne d'un point de vue UX/UI. J'ai donc opté pour la solution que
-  j'ai implémenté qui est plus ergonomique et plus performante, pour arriver a un résultat
-  similaire.
-- Afin d'avoir un système d'affichage de la date équivalent qui puisse être visible dans la démo,
-  j'ai du simuler la date du 18 septembre 2023 dans la fonction d'affichage de la date.
-- Le nombre de jetons de pokers qui tombent lors de l'animation sur le clic d'une TournamentCard dépent du prizepool
-- Je n'ai psa fais de "pixel perfect" car il n'y a pas de maquette à suivre ainsi que cela irait à l'encontre de l'utilisation de Tailwind et son design system.
-- J'ai utiliser des context pour faciliter la gestion des données à travers le projet et éviter de rerendre certains composants inutilements.
-- J'ai utilisé un scroll infini pour la liste des tournois, afin d'avoir à afficher une trop grande liste de tournois d'un coup et gagner en performance. J'ai utilisé pour cela un observer qui est une méthode récente, native aux moteurs de recherches et performante.
-- La memoisation permet aussi de gagner en performance en évitant certains rendu inutiles.
-- Avec Next.js: Utilisation de "use Client" pour les Client component. Les fichier page.tsx ainsi que l'architecture du dossier `/app` sert à la navigation entre les pages.
+## ✨ Fonctionnalités
 
-## Pistes d'améliorations
+- Pour les Triplets Poker, j’avais initialement opté pour afficher toutes les combinaisons possibles (environ 5 millions). Cependant, cette solution posait des problèmes de performance. J’ai partiellement résolu cela en procédant par calculs incrémentaux, tous les 20 résultats je m'arretais puis reprenait si besoin les calculs là où ils en étaient, mais j’ai opté pour une solution plus ergonomique et performante.
+- Mise en place d’un scroll infini pour la liste des tournois, avec un observer natif pour optimiser les performances.
+- Utilisation des contextes pour une gestion optimisée des données et éviter des re-rendus inutiles.
+- Le nombre de jetons affichés dans l’animation d’une TournamentCard dépend du prizepool.
+- J’ai simulé la date du 18 septembre 2023 pour un affichage cohérent dans la démo.
+- Utilisation de `use Client` pour les composants clients dans Next.js.
+- Utilisation de la mémoïsation pour réduire les re-rendus inutiles.
 
-- Régler le problème des index.ts, pour ne plus à avoir à afficher index dans les paths
-- L'animation présente 1 défault, si on clique trop vite sur le bouton elle bug.
-- Amélioration: afficher une animation sur les cards lors du survol, lorsqu'elles
-  disparaissent/apparaissent
-- Mettre des tests unitaires et/end to end
-- Mettre en place Storybook
-- Mise en place du cache avec Tanstack (React-Query)
+## 🔧 Pistes d'amélioration
 
-## Notes
+- Ajouter des animations aux cartes lors du hover et à leur disparition/apparition.
+- Résoudre le bug d’animation lors de clics rapides sur les `TournamentCard`.
+- Corriger l’affichage des chemins dans les index.ts.
+- Mettre en place des tests unitaires et end-to-end.
+- Ajouter du cache avec Tanstack (React-Query).
+- Intégrer Storybook.
 
-- J'ai limité la taille des composants car il n'y a aps assez de données à mon goût pour pouvoir
-  agrandire d'avantage les composants. Cela évite à l'utilisateur de devoir balayer de gauche à
-  droite l'écran afin d'avoir toutes les infos nécéssaires.
-- Lorsque la recherche de triplet tournois est active, les 3 étoiles du `ButtonTournamentsMenu` sont animés.
-- Vous pouvez regarder les notes de Lightouse en environnement de production (pnpm start), elles sont très correctes ;)
+## 📝 Notes
+
+- Pas de pixel perfect car il n’y avait pas de maquette spécifique et cela irait à l’encontre de l’approche Tailwind et du design system.
+- Limitation de la taille des composants pour éviter que l’utilisateur ait à balayer l’écran des yeux.
+- Lors de la recherche de triplets, les trois étoiles du `ButtonTournamentsMenu` sont animées.
+- Les scores Lighthouse en production (avec pnpm start) sont excellents ! 🚀
