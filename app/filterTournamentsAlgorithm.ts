@@ -24,7 +24,7 @@ export function filterTournaments(
   maxBudget: number,
   selectedTournament: Tournament | null = null,
   secondSelectedTournament: Tournament | null = null,
-) {
+): Tournament[] {
   function areCompatible(t1: Tournament, t2: Tournament) {
     const date1 = new Date(t1.startDate);
     const date2 = new Date(t2.startDate);

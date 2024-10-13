@@ -34,7 +34,7 @@ Pour lancer le projet, vous avez deux options :
 ## Choix Techniques
 
 - Next.JS: C'est performant, ça permet de facilement faire des server component, d'avoir un SEO
-  (référecnement google) excellent. Utilisation de "use Client" pour les Client component. Les fichier page.tsx ainsi que l'architecture du dossier `app` sert à la navigation entre les pages.
+  (référecnement google) excellent.
 - TailwindCSS :Permet d'avoir facilement un design responsive , un design system, et de gagner en
   performance
 - Framer Motion : Permet d'avoir des animations fluides et de qualité
@@ -43,11 +43,8 @@ Pour lancer le projet, vous avez deux options :
 - sinon : Pour simuler une date
 - prettier: Pour avoir un code propre et homogène
 
-## Notes
+## Fonctionnalités
 
-- J'ai limité la taille des composants car il n'y a aps assez de données à mon goût pour pouvoir
-  agrandire d'avantage les composants. Cela évite à l'utilisateur de devoir balayer de gauche à
-  droite l'écran afin d'avoir toutes les infos nécéssaires.
 - Pour la partie des Triplet Poker, j'ai d'abord opté pour afficher tous les triples tournois
   possibles. De souvenir j'étais arrivé à plus de 5 millions de possibilités. Cette solution avait
   deux problèmes selon moi. Le premier était pour les performance, j'ai commencé à résoudre ce
@@ -56,13 +53,18 @@ Pour lancer le projet, vous avez deux options :
   cette solution n'est pas la bonne d'un point de vue UX/UI. J'ai donc opté pour la solution que
   j'ai implémenté qui est plus ergonomique et plus performante, pour arriver a un résultat
   similaire.
-  - Afin d'avoir un système d'affichage de la date équivalent qui puisse être visible dans la démo,
-    j'ai du simuler la date du 18 septembre 2023 dans la fonction d'affichage de la date.
+- Afin d'avoir un système d'affichage de la date équivalent qui puisse être visible dans la démo,
+  j'ai du simuler la date du 18 septembre 2023 dans la fonction d'affichage de la date.
+- Le nombre de jetons de pokers qui tombent lors de l'animation sur le clic d'une TournamentCard dépent du prizepool
+- Je n'ai psa fais de "pixel perfect" car il n'y a pas de maquette à suivre ainsi que cela irait à l'encontre de l'utilisation de Tailwind et son design system.
+- J'ai utiliser des context pour faciliter la gestion des données à travers le projet et éviter de rerendre certains composants inutilements.
+- J'ai utilisé un scroll infini pour la liste des tournois, afin d'avoir à afficher une trop grande liste de tournois d'un coup et gagner en performance.
+- La memoisation permet aussi de gagner en performance en évitant certains rendu inutiles.
+- Avec Next.js: Utilisation de "use Client" pour les Client component. Les fichier page.tsx ainsi que l'architecture du dossier `/app` sert à la navigation entre les pages.
 
 ## Pistes d'améliorations
 
 - Régler le problème des index.ts, pour ne plus à avoir à afficher index dans les paths
-- ⚠️ Mettre de la doc
 - L'animation présente 1 défault, si on clique trop vite sur le bouton elle bug.
 - Amélioration: afficher une animation sur les cards lors du survol, lorsqu'elles
   disparaissent/apparaissent
@@ -71,4 +73,10 @@ Pour lancer le projet, vous avez deux options :
 - Mise en place du cache avec Tanstack (React-Query)
 - Le fichier TournamentList est un peu long, il pourrait être amélioré.
 
-Parler de l'utilisation des context pour faciliter la gestion des données à travers le projet, eviter de rerendre certains composants inutilements.
+## Notes
+
+- J'ai limité la taille des composants car il n'y a aps assez de données à mon goût pour pouvoir
+  agrandire d'avantage les composants. Cela évite à l'utilisateur de devoir balayer de gauche à
+  droite l'écran afin d'avoir toutes les infos nécéssaires.
+- Lorsque la recherche de triplet tournois est active, les 3 étoiles du `ButtonTournamentsMenu` sont animés.
+- Vous pouvez regarder les notes de Lightouse en environnement de production (pnpm start), elles sont très correctes ;)

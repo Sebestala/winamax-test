@@ -24,6 +24,7 @@ export default function Home(): JSX.Element {
               src="/assets/tournois.jpg"
               alt="tournois"
               fill
+              sizes="(max-width: 640px) 100vw, 50vw"
               className="rounded-2xl object-cover"
               priority
             />

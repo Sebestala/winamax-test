@@ -15,7 +15,7 @@ export const TopNavBar = (): JSX.Element => (
       <Image
         src="/assets/logo.png"
         alt="Winamax Logo"
-        className="h-12 h-auto w-auto"
+        className="h-auto w-auto"
         width={42}
         height={42}
         style={{ objectFit: "contain" }}
