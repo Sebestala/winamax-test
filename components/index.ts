@@ -4,5 +4,6 @@ export * from "./Home/TournamentCard";
 export * from "./Home/TournamentList";
 export * from "./Home/ButtonTournamentsMenu";
 export * from "./Home/PokerChipToggle";
+export * from "./Home/TournamentWrapper";
 export * from "./ui/TokenAnimation";
 export * from "./ui/PokerChip";

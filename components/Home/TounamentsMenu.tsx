@@ -33,7 +33,6 @@ export function TournamentsMenu({
     maxBudget,
     setMinBudget,
     setMaxBudget,
-    isTripleTournaments,
     setIsTripleTournaments,
     toggleIsChangeBudget,
   } = useBudget();
@@ -82,9 +81,7 @@ export function TournamentsMenu({
           <h2 className="font-archivoBold text-3xl text-textColor">
             Triple Tournois
           </h2>
-          <PokerChipToggle
-            onChange={() => setIsTripleTournaments(!isTripleTournaments)}
-          />
+          <PokerChipToggle />
         </div>
         <p className="mb-4 font-archivo text-sm text-textColor">
           Entrez votre fourchette de budget pour trouver les triplets de

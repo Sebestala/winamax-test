@@ -6,29 +6,20 @@ import { PokerChip } from "@/components/ui/PokerChip";
 import { cn } from "@/utils/utils";
 import { useBudget } from "@/context/BudgetContext";
 
-interface PokerChipToggleProps {
-  onChange: (isActive: boolean) => void;
-}
-
 /**
  * Toggle switch component for activating or deactivating the triple tournaments feature.
- *
- * @param {function(boolean): void} onChange - Callback function triggered when the toggle state changes.
- * @returns {JSX.Element} The rendered toggle component that animates the poker chip based on its state.
  *
  * Features:
  * - Changes background color based on the active state.
  * - Animates a poker chip that moves and changes appearance when toggled.
  */
-export function PokerChipToggle({
-  onChange,
-}: PokerChipToggleProps): JSX.Element {
-  const { isTripleTournaments } = useBudget();
+export function PokerChipToggle(): JSX.Element {
+  const { isTripleTournaments, setIsTripleTournaments } = useBudget();
   const [isActive, setIsActive] = useState(isTripleTournaments);
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
-    onChange(!isActive);
+    setIsTripleTournaments(!isTripleTournaments);
   };
 
   return (

@@ -58,7 +58,7 @@ Pour lancer le projet, vous avez deux options :
 - Le nombre de jetons de pokers qui tombent lors de l'animation sur le clic d'une TournamentCard dépent du prizepool
 - Je n'ai psa fais de "pixel perfect" car il n'y a pas de maquette à suivre ainsi que cela irait à l'encontre de l'utilisation de Tailwind et son design system.
 - J'ai utiliser des context pour faciliter la gestion des données à travers le projet et éviter de rerendre certains composants inutilements.
-- J'ai utilisé un scroll infini pour la liste des tournois, afin d'avoir à afficher une trop grande liste de tournois d'un coup et gagner en performance.
+- J'ai utilisé un scroll infini pour la liste des tournois, afin d'avoir à afficher une trop grande liste de tournois d'un coup et gagner en performance. J'ai utilisé pour cela un observer qui est une méthode récente, native aux moteurs de recherches et performante.
 - La memoisation permet aussi de gagner en performance en évitant certains rendu inutiles.
 - Avec Next.js: Utilisation de "use Client" pour les Client component. Les fichier page.tsx ainsi que l'architecture du dossier `/app` sert à la navigation entre les pages.
 
@@ -71,7 +71,6 @@ Pour lancer le projet, vous avez deux options :
 - Mettre des tests unitaires et/end to end
 - Mettre en place Storybook
 - Mise en place du cache avec Tanstack (React-Query)
-- Le fichier TournamentList est un peu long, il pourrait être amélioré.
 
 ## Notes
 

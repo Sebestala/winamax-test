@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
@@ -14,8 +14,10 @@ import { cn } from "@/utils/utils";
  * - Contains buttons for navigating to the Home and Readme sections.
  */
 export const BottomNavBar = (): JSX.Element => {
-  const [activeTab, setActiveTab] = useState("home");
   const router = useRouter();
+  const pathname = usePathname();
+  const isHome = pathname === "/" || pathname === "/home";
+  const [activeTab, setActiveTab] = useState(isHome ? "home" : "readme");
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-300 bg-white">

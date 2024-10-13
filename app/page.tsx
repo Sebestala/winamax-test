@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {
-  TournamentList,
+  TournamentWrapper,
   TokenAnimation,
   ButtonTournamentsMenu,
 } from "@/components/index";
@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
               <div className={cn(InfoClass)}>Buy-in</div>
               <div className={cn(InfoClass)}>Dotation</div>
             </div>
-            <TournamentList />
+            <TournamentWrapper />
           </div>
           <ButtonTournamentsMenu />
         </div>
